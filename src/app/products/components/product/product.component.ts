@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -7,8 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
   
-  @Input() name: string;
-  @Input() isAvailable: boolean;
+  @Input() product: Product;
 
   constructor() { }
 
@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   }
 
   onBuy(): void {
-    this.isAvailable = !this.isAvailable;
+    this.product.isAvailable = !this.product.isAvailable;
   }
 
 }

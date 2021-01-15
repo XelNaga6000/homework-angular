@@ -1,0 +1,22 @@
+<div class="product">
+  <h3>
+    {{product.name}} (
+    <span [ngSwitch]="product.category">
+      <span *ngSwitchCase="1">Beer</span>
+      <span *ngSwitchCase="2">Wine</span>
+      <span *ngSwitchCase="3">Whisky</span>
+      <span *ngSwitchDefault>Unknown</span>
+    </span>
+    )
+  </h3>
+  <p>{{product.description}}</p>
+  <div>{{product.price}}</div>
+  <div *ngIf="product.isAvailable; else elseBlock">
+    <button type="button" (click)="onBuy(task)">Buy</button>
+  </div>
+  <ng-template #elseBlock>
+    <div>
+      Not in Stock
+    </div>
+  </ng-template>
+</div>
