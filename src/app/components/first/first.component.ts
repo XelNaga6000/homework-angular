@@ -12,6 +12,7 @@ export enum Categoty {
   styleUrls: ['./first.component.scss']
 })
 export class FirstComponent implements OnInit {
+
   @Input() name: string;
   @Input() description: string;
   @Input() price: number;
@@ -19,6 +20,7 @@ export class FirstComponent implements OnInit {
   @Input() isAvailable: boolean;
 
   constructor() { }
+
   ngOnInit(): void {
   }
 }

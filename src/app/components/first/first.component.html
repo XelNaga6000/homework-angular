@@ -6,9 +6,9 @@
     <span *ngSwitchDefault>Unknown</span>
   </h3>
   <h3>{{name}}</h3>
-  <div *ngIf="isAvailable">
-    Not in Stock
-  </div>
   <p>{{description}}</p>
   <div>{{price}}</div>
+  <div *ngIf="!isAvailable">
+    Not in Stock
+  </div>
 </div>

@@ -1,0 +1,12 @@
+<div>
+  <app-first
+    [name]="name"
+    description="Good one"
+    price="100"
+    category="3"
+    [isAvailable]="isAvailable"
+  ></app-first>
+  <div *ngIf="isAvailable">
+    <button type="button" (click)="onBuy(task)">Buy</button>
+  </div>
+</div>
