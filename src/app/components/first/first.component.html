@@ -1,1 +1,14 @@
-<p>first works!</p>
+<div>
+  <h3 [ngSwitch]="category">
+    <span *ngSwitchCase="1">Beer</span>
+    <span *ngSwitchCase="2">Wine</span>
+    <span *ngSwitchCase="3">Whisky</span>
+    <span *ngSwitchDefault>Unknown</span>
+  </h3>
+  <h3>{{name}}</h3>
+  <div *ngIf="isAvailable">
+    Not in Stock
+  </div>
+  <p>{{description}}</p>
+  <div>{{price}}</div>
+</div>
