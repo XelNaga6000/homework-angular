@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/products/models/product.model';
+import { CartItem } from '../../models/cart-item.model';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -8,16 +9,21 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
-  products: Array<Product>;
+  items: Array<CartItem>;
 
-  trackByProduct(index: number, product: Product): string { 
-    return product.name;
+  trackByItem(index: number, item: CartItem): string { 
+    return item.product.name;
   }
 
   constructor(private cartService: CartService) {
-    this.products = cartService.getCart();
+    this.items = cartService.getCart();
   }
 
   ngOnInit(): void {
+  }
+
+  onRemove(name: string): void {
+    this.cartService.removeFromCart(name);
+    this.items = this.cartService.getCart();
   }
 }

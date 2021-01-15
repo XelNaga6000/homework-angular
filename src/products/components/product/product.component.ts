@@ -19,7 +19,6 @@ export class ProductComponent implements OnInit {
   }
 
   onBuy(): void {
-    this.product.isAvailable = !this.product.isAvailable;
     this.cartService.addToCart(this.product);
   }
 
