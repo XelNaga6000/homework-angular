@@ -11,7 +11,7 @@ import { CartService } from '../../services/cart.service';
 export class CartListComponent implements OnInit {
   items: Array<CartItem>;
 
-  trackByItem(index: number, item: CartItem): string { 
+  trackByItem(index: number, item: CartItem): string {
     return item.product.name;
   }
 

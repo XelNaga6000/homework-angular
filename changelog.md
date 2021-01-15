@@ -7,3 +7,5 @@ Added ProductList component; Added ProductsService; Added Product model; Remove 
 Changed folder structure
 Added CartList component; Added Cart service
 Added CartItem model; Added remove functionallity
+Added changelog.md
+Minor Fixes

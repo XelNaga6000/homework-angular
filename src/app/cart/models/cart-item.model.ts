@@ -1,4 +1,4 @@
-import { Product } from "src/products/models/product.model";
+import { Product } from 'src/products/models/product.model';
 
 export class CartItem {
   product: Product;
