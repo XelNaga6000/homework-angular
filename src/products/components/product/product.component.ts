@@ -7,7 +7,7 @@ import { Product } from '../../models/product.model';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  
+
   @Input() product: Product;
 
   constructor() { }
