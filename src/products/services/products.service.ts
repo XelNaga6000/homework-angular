@@ -12,7 +12,6 @@ const products = [
 export class ProductsService {
 
   getProducts(): Array<Product> {
-    console.log(products);
     return products;
   }
 

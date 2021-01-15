@@ -1,0 +1,13 @@
+<div class="cart-list">
+  <h4>Cart</h4>
+  <div *ngIf="products.length; else elseBlock">
+    <div *ngFor="let product of products; trackBy: trackByProduct">
+      {{product.name}} - {{product.price}}
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div>
+      Cart is empty
+    </div>
+  </ng-template>
+</div>
