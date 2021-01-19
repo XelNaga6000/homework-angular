@@ -13,3 +13,4 @@ Minor Fixes
 
 19.01.2021
 Fixed code according to comments
+Changed folder structure according to comments
