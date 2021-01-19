@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "homework-angular"
+  "defaultProject": "homework-angular",
+  "cli": {
+    "analytics": false
+  }
 }

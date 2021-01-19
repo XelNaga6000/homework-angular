@@ -15,6 +15,7 @@ export class CartService {
     const existingItem = this.cart.find(c => c.product.name === product.name);
 
     if (!existingItem) {
+      // тут у вас мутация данных
       this.cart.push(new CartItem(product));
     } else {
       existingItem.count++;
@@ -23,6 +24,7 @@ export class CartService {
   }
 
   removeFromCart(name: string): void {
+    // а тут у вас уже пересоздание - два разных подхода
     this.cart = this.cart.filter(p => p.product.name !== name);
   }
 

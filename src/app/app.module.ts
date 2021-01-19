@@ -22,3 +22,4 @@ import { CartListComponent } from '../cart/components/cart-list/cart-list.compon
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// Перенесите ваши сущности в папку app
