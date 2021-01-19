@@ -5,17 +5,19 @@ export enum Categoty {
 }
 
 export class Product {
-  name: string;
-  description: string;
-  price: number;
-  category: Categoty;
-  isAvailable: boolean;
+  // name: string;
+  // description: string;
+  // price: number;
+  // category: Categoty;
+  // isAvailable: boolean;
 
-  constructor(name: string, description: string, price: number, category: Categoty) {
-    this.name = name;
-    this.description = description;
-    this.price = price;
-    this.category = category;
-    this.isAvailable = true;
+  // альтернативный вариант
+  constructor(public name: string, public description: string, public price: number,
+              public category: Categoty, public isAvailable = true) {
+    // this.name = name;
+    // this.description = description;
+    // this.price = price;
+    // this.category = category;
+    // this.isAvailable = true;
   }
 }
