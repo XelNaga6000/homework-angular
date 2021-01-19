@@ -11,12 +11,10 @@ import { CartService } from '../../services/cart.service';
 export class CartListComponent implements OnInit {
   items: Array<CartItem>;
 
-  // в шаблоне другое название
   trackByProduct(index: number, item: CartItem): string {
     return item.product.name;
   }
 
-  // в конструкторе только внедрение зависимости
   constructor(private cartService: CartService) {
   }
 
@@ -26,6 +24,5 @@ export class CartListComponent implements OnInit {
 
   onRemove(name: string): void {
     this.cartService.removeFromCart(name);
-    this.items = this.cartService.getCart();
   }
 }

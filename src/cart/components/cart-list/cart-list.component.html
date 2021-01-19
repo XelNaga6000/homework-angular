@@ -2,7 +2,7 @@
   <h4>Cart</h4>
   <div *ngIf="items.length; else elseBlock">
     <div *ngFor="let item of items; trackBy: trackByProduct">
-      {{item.product.name}} - {{item.count}} - {{item.price}}$
+      {{item.product.name}} - {{item.count}} - {{item.totalPrice}}$
       <button type="button" (click)="onRemove(item.product.name)">Remove</button> 
     </div>
   </div>

@@ -12,8 +12,7 @@
   <p>{{product.description}}</p>
   <div>{{product.price}}</div>
   <div *ngIf="product.isAvailable; else elseBlock">
-    <!-- не понятно, что такое task -->
-    <button type="button" (click)="onBuy(task)">Buy</button>
+    <button type="button" (click)="onBuy()">Buy</button>
   </div>
   <ng-template #elseBlock>
     <div>

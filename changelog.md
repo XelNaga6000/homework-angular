@@ -1,3 +1,4 @@
+15.01.2021
 initial commit
 Modifed package.json start script
 Added FirstComponent
@@ -9,3 +10,6 @@ Added CartList component; Added Cart service
 Added CartItem model; Added remove functionallity
 Added changelog.md
 Minor Fixes
+
+19.01.2021
+Fixed code according to comments

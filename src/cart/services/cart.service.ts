@@ -15,17 +15,26 @@ export class CartService {
     const existingItem = this.cart.find(c => c.product.name === product.name);
 
     if (!existingItem) {
-      // тут у вас мутация данных
       this.cart.push(new CartItem(product));
     } else {
       existingItem.count++;
-      existingItem.price += product.price;
+      existingItem.totalPrice += product.price;
     }
   }
 
   removeFromCart(name: string): void {
-    // а тут у вас уже пересоздание - два разных подхода
-    this.cart = this.cart.filter(p => p.product.name !== name);
+    const index = this.cart.findIndex(c => c.product.name === name);
+
+    if (index >= 0 && index < this.cart.length) {
+      const existingItem = this.cart[index];
+
+      if (existingItem.count > 1) {
+        existingItem.totalPrice -= existingItem.price;
+        existingItem.count--;
+      } else {
+        this.cart.splice(index, 1);
+      }
+    }
   }
 
   getCart(): Array<CartItem> {
