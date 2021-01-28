@@ -3,7 +3,8 @@ import { Categoty, Product } from '../models/product.model';
 
 const products = [
   new Product('Lagavulin', 'Good one', 100, Categoty.Whisky),
-  new Product('Aznauri', 'Bad one', 10, Categoty.Wine)
+  new Product('Aznauri', 'Bad one', 10, Categoty.Wine),
+  new Product('Macallan', 'Rare one', 1000, Categoty.Whisky, false)
 ];
 
 @Injectable({

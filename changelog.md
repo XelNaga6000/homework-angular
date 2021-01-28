@@ -17,3 +17,4 @@ Changed folder structure according to comments
 
 28.01.2021
 Added separate modules
+Changed Product component; Moved all logic to its parent - ProductList
