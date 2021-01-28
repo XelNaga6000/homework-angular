@@ -3,23 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductComponent } from './products/components/product/product.component';
-import { ProductListComponent } from './products/components/product-list/product-list.component';
-import { CartListComponent } from './cart/components/cart-list/cart-list.component';
+import { ProductsModule } from './products/products.module';
+import { CartModule } from './cart/cart.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProductComponent,
-    ProductListComponent,
-    CartListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ProductsModule,
+    CartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-// Перенесите ваши сущности в папку app

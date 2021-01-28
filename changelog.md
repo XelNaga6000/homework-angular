@@ -14,3 +14,6 @@ Minor Fixes
 19.01.2021
 Fixed code according to comments
 Changed folder structure according to comments
+
+28.01.2021
+Added separate modules
