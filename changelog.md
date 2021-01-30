@@ -23,3 +23,4 @@ Changed Product component; Moved all logic to its parent - ProductList
 Added CartItem component; Moved all logic to its parent; Refactored and extended Cart service; Use OnPush strategy wher possible; Refactored models a little
 Added DOM events into CartItem and Product components
 Added header into App component and set its text via ViewChild
+Added highlight directive; TSLint fixes

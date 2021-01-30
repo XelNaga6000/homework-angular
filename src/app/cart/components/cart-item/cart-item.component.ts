@@ -29,7 +29,7 @@ export class CartItemComponent {
   }
 
   onKeyUp(event: KeyboardEvent): void {
-    switch(event?.key) {
+    switch (event?.key) {
       case '+':
         this.increaseCount.emit(this.item.product);
         return;
