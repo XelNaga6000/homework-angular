@@ -1,4 +1,4 @@
-<div class="cart-item">
+<div class="cart-item" (keyup)="onKeyUp($event)">
   {{item.product.name}} - {{item.count}} - {{item.count * item.product.price}}$
   <button type="button" (click)="onIncrease()">+</button> 
   <button type="button" (click)="onDecrease()">-</button> 

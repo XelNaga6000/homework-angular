@@ -27,4 +27,20 @@ export class CartItemComponent {
   onRemove(): void {
     this.removeProduct.emit(this.item.product);
   }
+
+  onKeyUp(event: KeyboardEvent): void {
+    switch(event?.key) {
+      case '+':
+        this.increaseCount.emit(this.item.product);
+        return;
+      case '-':
+        this.decreaseCount.emit(this.item.product);
+        return;
+      case 'Delete':
+        this.removeProduct.emit(this.item.product);
+        return;
+      default:
+        return;
+    }
+  }
 }

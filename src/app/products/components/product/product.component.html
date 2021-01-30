@@ -1,4 +1,4 @@
-<div class="product">
+<div class="product" (keyup)="onKeyUp($event)">
   <h3>
     {{product.name}} (
     <span [ngSwitch]="product.category">
