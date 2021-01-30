@@ -2,8 +2,16 @@
   <h4>Cart</h4>
   <div *ngIf="items.length; else elseBlock">
     <div *ngFor="let item of items; trackBy: trackByProduct">
-      {{item.product.name}} - {{item.count}} - {{item.totalPrice}}$
-      <button type="button" (click)="onRemove(item.product.name)">Remove</button> 
+      <app-cart-item
+        [item]="item"
+        (increaseCount)="onIncreaseCount($event)"
+        (decreaseCount)="onDecreaseCount($event)"
+        (removeProduct)="onRemoveProduct($event)"
+      >
+      </app-cart-item>
+    </div>
+    <div>
+      Total: {{getCartTotal()}}
     </div>
   </div>
   <ng-template #elseBlock>

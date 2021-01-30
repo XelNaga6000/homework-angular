@@ -18,3 +18,6 @@ Changed folder structure according to comments
 28.01.2021
 Added separate modules
 Changed Product component; Moved all logic to its parent - ProductList
+
+30.01.2021
+Added CartItem component; Moved all logic to its parent; Refactored and extended Cart service; Use OnPush strategy wher possible; Refactored models a little

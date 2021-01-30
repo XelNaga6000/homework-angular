@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../products/models/product.model';
 import { CartItem } from '../../models/cart-item.model';
 import { CartService } from '../../services/cart.service';
@@ -12,17 +12,29 @@ export class CartListComponent implements OnInit {
   items: Array<CartItem>;
 
   trackByProduct(index: number, item: CartItem): string {
-    return item.product.name;
+    return item.product.id;
   }
 
   constructor(private cartService: CartService) {
   }
 
   ngOnInit(): void {
-    this.items = this.cartService.getCart();
+    this.items = this.cartService.getCartItems();
   }
 
-  onRemove(name: string): void {
-    this.cartService.removeFromCart(name);
+  onIncreaseCount(product: Product): void {
+    this.cartService.increaseProductCount(product);
+  }
+
+  onDecreaseCount(product: Product): void {
+    this.cartService.decreaseProductCount(product);
+  }
+
+  onRemoveProduct(product: Product): void {
+    this.cartService.removeProductFromCart(product);
+  }
+
+  getCartTotal(): number {
+    return this.cartService.getCartTotal();
   }
 }

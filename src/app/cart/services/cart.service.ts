@@ -11,33 +11,41 @@ export class CartService {
 
   constructor() { }
 
-  addToCart(product: Product): void {
-    const existingItem = this.cart.find(c => c.product.name === product.name);
+  increaseProductCount(product: Product): void {
+    const index = this.cart.findIndex(c => c.product.id === product.id);
 
-    if (!existingItem) {
-      this.cart.push(new CartItem(product));
+    if (index >= 0 && index < this.cart.length) {
+      this.cart[index].count++;
     } else {
-      existingItem.count++;
-      existingItem.totalPrice += product.price;
+      this.cart.push(new CartItem(product));
     }
   }
 
-  removeFromCart(name: string): void {
-    const index = this.cart.findIndex(c => c.product.name === name);
+  decreaseProductCount(product: Product): void {
+    const index = this.cart.findIndex(c => c.product.id === product.id);
 
     if (index >= 0 && index < this.cart.length) {
-      const existingItem = this.cart[index];
-
-      if (existingItem.count > 1) {
-        existingItem.totalPrice -= existingItem.price;
-        existingItem.count--;
+      if (this.cart[index].count > 1) {
+        this.cart[index].count--;
       } else {
         this.cart.splice(index, 1);
       }
     }
   }
 
-  getCart(): Array<CartItem> {
+  removeProductFromCart(product: Product): void {
+    const index = this.cart.findIndex(c => c.product.id === product.id);
+
+    if (index >= 0 && index < this.cart.length) {
+      this.cart.splice(index, 1);
+    }
+  }
+
+  getCartItems(): Array<CartItem> {
     return this.cart;
+  }
+
+  getCartTotal(): number {
+    return this.cart.reduce((acc, val) => acc + (val.count * val.product.price), 0);
   }
 }

@@ -1,0 +1,6 @@
+<div class="cart-item">
+  {{item.product.name}} - {{item.count}} - {{item.count * item.product.price}}$
+  <button type="button" (click)="onIncrease()">+</button> 
+  <button type="button" (click)="onDecrease()">-</button> 
+  <button type="button" (click)="onRemove()">Remove</button> 
+</div>
