@@ -1,6 +1,6 @@
 <div class="cart-list">
   <h4>Cart</h4>
-  <div *ngIf="items.length; else elseBlock">
+  <div *ngIf="!isEmptyCart(); else elseBlock">
     <div *ngFor="let item of items; trackBy: trackByProduct">
       <app-cart-item
         [item]="item"
@@ -11,7 +11,9 @@
       </app-cart-item>
     </div>
     <div>
-      Total: {{getCartTotal()}}
+      <p>Total Quantity: {{getTotalQuantity()}}</p>
+      <p>Total Sum: {{getTotalSum()}}</p>
+      <button (click)="onRemoveAll()">Remove All</button>
     </div>
   </div>
   <ng-template #elseBlock>
