@@ -7,8 +7,8 @@ import { CartItem } from '../models/cart-item.model';
 })
 export class CartService {
   private cartProducts: Array<CartItem> = [];
-  private totalQuantity: number = 0;
-  private totalSum: number = 0;
+  private totalQuantity = 0;
+  private totalSum = 0;
 
   constructor() { }
 
