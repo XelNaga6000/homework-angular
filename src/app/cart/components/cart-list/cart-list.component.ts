@@ -34,7 +34,7 @@ export class CartListComponent implements OnInit {
     this.cartService.removeProduct(product);
   }
 
-  onRemoveAll():void {
+  onRemoveAll(): void {
     this.cartService.removeAllProducts();
   }
 

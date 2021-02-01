@@ -27,3 +27,6 @@ Added highlight directive; TSLint fixes
 
 31.01.2021
 Modified Cart service and modified components which are using it accordingly
+
+01.02.2021
+Created ConfigOptions service and Config interface
