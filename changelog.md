@@ -24,3 +24,15 @@ Added CartItem component; Moved all logic to its parent; Refactored and extended
 Added DOM events into CartItem and Product components
 Added header into App component and set its text via ViewChild
 Added highlight directive; TSLint fixes
+
+31.01.2021
+Modified Cart service and modified components which are using it accordingly
+
+01.02.2021
+Created ConfigOptions service and Config interface
+Created Constants token/instance; Added Firat Component
+
+02.02.2021
+Added Generator service and factory
+Added LocalStorage service
+Added Border directive

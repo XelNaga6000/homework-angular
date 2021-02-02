@@ -6,46 +6,80 @@ import { CartItem } from '../models/cart-item.model';
   providedIn: 'root'
 })
 export class CartService {
-
-  private cart: Array<CartItem> = [];
+  private cartProducts: Array<CartItem> = [];
+  private totalQuantity = 0;
+  private totalSum = 0;
 
   constructor() { }
 
-  increaseProductCount(product: Product): void {
-    const index = this.cart.findIndex(c => c.product.id === product.id);
+  getProducts(): Array<CartItem> {
+    return this.cartProducts;
+  }
 
-    if (index >= 0 && index < this.cart.length) {
-      this.cart[index].count++;
+  getTotalQuantity(): number {
+    return this.totalQuantity;
+  }
+
+  getTotalSum(): number {
+    return this.totalSum;
+  }
+
+  addProduct(product: Product, quantity: number = 1): void {
+    const index = this.cartProducts.findIndex(c => c.product.id === product.id);
+
+    if (index >= 0 && index < this.cartProducts.length) {
+      this.cartProducts[index].quantity += quantity;
     } else {
-      this.cart.push(new CartItem(product));
+      this.cartProducts.push(new CartItem(product, quantity));
+    }
+
+    this.updateCartData();
+  }
+
+  removeProduct(product: Product): void {
+    const index = this.cartProducts.findIndex(c => c.product.id === product.id);
+
+    if (index >= 0 && index < this.cartProducts.length) {
+      this.cartProducts.splice(index, 1);
+      this.updateCartData();
     }
   }
 
-  decreaseProductCount(product: Product): void {
-    const index = this.cart.findIndex(c => c.product.id === product.id);
+  removeAllProducts(): void {
+    if (this.cartProducts.length) {
+      this.cartProducts.splice(0, this.cartProducts.length);
+      this.updateCartData();
+    }
+  }
 
-    if (index >= 0 && index < this.cart.length) {
-      if (this.cart[index].count > 1) {
-        this.cart[index].count--;
+  increaseQuantity(product: Product): void {
+    this.changeQuantity(product, 1);
+    this.updateCartData();
+  }
+
+  decreaseQuantity(product: Product): void {
+    this.changeQuantity(product, -1);
+    this.updateCartData();
+  }
+
+  isEmptyCart(): boolean {
+    return this.cartProducts.length === 0 ;
+  }
+
+  private changeQuantity(product: Product, quantity: number): void {
+    const index = this.cartProducts.findIndex(c => c.product.id === product.id);
+
+    if (index >= 0 && index < this.cartProducts.length) {
+      if (this.cartProducts[index].quantity + quantity > 0) {
+        this.cartProducts[index].quantity += quantity;
       } else {
-        this.cart.splice(index, 1);
+        this.cartProducts.splice(index, 1);
       }
     }
   }
 
-  removeProductFromCart(product: Product): void {
-    const index = this.cart.findIndex(c => c.product.id === product.id);
-
-    if (index >= 0 && index < this.cart.length) {
-      this.cart.splice(index, 1);
-    }
-  }
-
-  getCartItems(): Array<CartItem> {
-    return this.cart;
-  }
-
-  getCartTotal(): number {
-    return this.cart.reduce((acc, val) => acc + (val.count * val.product.price), 0);
+  private updateCartData(): void {
+    this.totalQuantity = this.cartProducts.reduce((acc, val) => acc + val.quantity, 0);
+    this.totalSum = this.cartProducts.reduce((acc, val) => acc + (val.quantity * val.product.price), 0);
   }
 }
