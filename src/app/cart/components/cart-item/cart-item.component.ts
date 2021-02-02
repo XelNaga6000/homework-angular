@@ -8,7 +8,7 @@ import { CartItem } from '../../models/cart-item.model';
   styleUrls: ['./cart-item.component.scss'],
   // Since item.count could be incremented from ProductItem component - OnPush strategy will not work here.
   // Dont know how to trigger it manually
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartItemComponent {
   @Input() item: CartItem;

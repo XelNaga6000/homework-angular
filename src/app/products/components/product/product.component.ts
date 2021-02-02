@@ -16,6 +16,7 @@ export class ProductComponent {
   }
 
   onKeyUp(event: KeyboardEvent): void {
+    // если event задае как обязательный параметр, то, может, не надо его дополнительно проверять?
     if (event?.key === '+') {
       this.buyProduct.emit(this.product);
     }

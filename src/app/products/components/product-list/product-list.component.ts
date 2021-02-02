@@ -9,7 +9,7 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  @Input() products: Array<Product>;
+  @Input() products: Array<Product>; // зачем тут декоратор, если данные получаем внутри компонента?
 
   constructor(
     private productsService: ProductsService,
