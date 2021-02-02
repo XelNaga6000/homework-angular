@@ -16,7 +16,7 @@ export class ProductComponent {
   }
 
   onKeyUp(event: KeyboardEvent): void {
-    if (event?.key === '+') {
+    if (event.key === '+') {
       this.buyProduct.emit(this.product);
     }
   }

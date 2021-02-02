@@ -9,7 +9,9 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
-  items: Array<CartItem>;
+  get items(): Array<CartItem> {
+    return this.cartService.getProducts();
+  }
 
   trackByProduct(index: number, item: CartItem): string {
     return item.product.id;
@@ -19,7 +21,7 @@ export class CartListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.items = this.cartService.getProducts();
+    // this.items = this.cartService.getProducts();
   }
 
   onIncreaseCount(product: Product): void {

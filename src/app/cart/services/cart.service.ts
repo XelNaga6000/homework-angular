@@ -27,27 +27,27 @@ export class CartService {
   addProduct(product: Product, quantity: number = 1): void {
     const index = this.cartProducts.findIndex(c => c.product.id === product.id);
 
+
     if (index >= 0 && index < this.cartProducts.length) {
-      this.cartProducts[index].quantity += quantity;
+      this.cartProducts = this.cartProducts.map(c => c.product.id === product.id ? {
+        ...c,
+        quantity: c.quantity + quantity
+      } : c);
     } else {
-      this.cartProducts.push(new CartItem(product, quantity));
+      this.cartProducts = [...this.cartProducts, new CartItem(product, quantity)];
     }
 
     this.updateCartData();
   }
 
   removeProduct(product: Product): void {
-    const index = this.cartProducts.findIndex(c => c.product.id === product.id);
-
-    if (index >= 0 && index < this.cartProducts.length) {
-      this.cartProducts.splice(index, 1);
-      this.updateCartData();
-    }
+    this.cartProducts = this.cartProducts.filter(c => c.product.id !== product.id);
+    this.updateCartData();
   }
 
   removeAllProducts(): void {
     if (this.cartProducts.length) {
-      this.cartProducts.splice(0, this.cartProducts.length);
+      this.cartProducts = [];
       this.updateCartData();
     }
   }
@@ -71,9 +71,9 @@ export class CartService {
 
     if (index >= 0 && index < this.cartProducts.length) {
       if (this.cartProducts[index].quantity + quantity > 0) {
-        this.cartProducts[index].quantity += quantity;
+        this.addProduct(product, quantity);
       } else {
-        this.cartProducts.splice(index, 1);
+        this.removeProduct(product);
       }
     }
   }
