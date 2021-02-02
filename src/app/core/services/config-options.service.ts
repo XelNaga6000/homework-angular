@@ -5,7 +5,7 @@ import { Config } from '../shared/config.interface';
   providedIn: 'root'
 })
 export class ConfigOptionsService {
-  private configOptions: Config = {}
+  private configOptions: Config = {};
 
   constructor() { }
 

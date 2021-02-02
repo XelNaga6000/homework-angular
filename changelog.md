@@ -31,3 +31,6 @@ Modified Cart service and modified components which are using it accordingly
 01.02.2021
 Created ConfigOptions service and Config interface
 Created Constants token/instance; Added Firat Component
+
+02.02.2021
+Added Generator service and factory
