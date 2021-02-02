@@ -35,3 +35,4 @@ Created Constants token/instance; Added Firat Component
 02.02.2021
 Added Generator service and factory
 Added LocalStorage service
+Added Border directive
