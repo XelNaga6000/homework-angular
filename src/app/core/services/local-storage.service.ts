@@ -1,20 +1,31 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
-
-export const localStorageKeyToken = new InjectionToken<string>('KeyToken');
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LocalStorageService {
-  // i'm not sure why do we need useValue in this task, so i'm using it for key
-  // (even if it is stupid from practical point of view)
-  // Сегодня я объяснил ситуацию, надеюсь понятна цель задания.
   constructor(
-    @Inject(localStorageKeyToken) private key: string) { }
+    private defaultGetValue: string = null
+  ) { }
 
-  getValue(): any {
-    return localStorage.getItem(this.key);
+  getValue(key: string): string {
+    console.log(`Reading ${key} value`);
+    const value = localStorage.getItem(key);
+
+    if (this.defaultGetValue && !value) {
+      console.log(
+        `Could not readt value from ${key}.
+        Default value used: ${this.defaultGetValue}`
+      );
+      return this.defaultGetValue;
+    }
+
+    return value;
   }
 
-  setValue(value: any): void {
-    localStorage.setItem(this.key, value);
+  setValue(key: string, value: any): void {
+    console.log(`Saving ${value} in ${key}`);
+    localStorage.setItem(key, value);
   }
 }
+
+export const localStorageInstance = new LocalStorageService();
+export const localStorageSafeInstance = new LocalStorageService('No value found');
