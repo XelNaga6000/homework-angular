@@ -31,10 +31,14 @@ export class CartService {
     if (index >= 0 && index < this.cartProducts.length) {
       this.cartProducts = this.cartProducts.map(c => c.product.id === product.id ? {
         ...c,
-        quantity: c.quantity + quantity
+        quantity: c.quantity + quantity,
+        totalPrice: c.product.price * (c.quantity + quantity)
       } : c);
     } else {
-      this.cartProducts = [...this.cartProducts, new CartItem(product, quantity)];
+      this.cartProducts = [
+        ...this.cartProducts,
+        new CartItem(product, quantity, (product.price * quantity))
+      ];
     }
 
     this.updateCartData();
