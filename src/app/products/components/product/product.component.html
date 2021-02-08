@@ -10,7 +10,7 @@
     )
   </h3>
   <p>{{product.description}}</p>
-  <div>{{product.price}}</div>
+  <div>{{product.price | currency:'USD':'symbol':'1.0-2'}}</div>
   <div *ngIf="product.isAvailable; else elseBlock">
     <button type="button" (click)="onBuy()">Buy</button>
   </div>

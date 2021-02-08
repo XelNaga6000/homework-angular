@@ -3,7 +3,11 @@
   [ngClass]="{'cart-item': true, 'highlight': false}"
   appHighlight
 >
-  {{item.product.name}} - {{item.quantity}} - {{item.quantity * item.product.price}}$
+  <p>
+    {{item.product.name}}
+    - <span>{{item.quantity}}</span>
+    - <span>{{item.quantity * item.product.price | currency:'USD':'symbol':'1.0-2'}}</span>
+  </p>
   <button type="button" (click)="onIncrease()">+</button> 
   <button type="button" (click)="onDecrease()">-</button> 
   <button type="button" (click)="onRemove()">Remove</button> 

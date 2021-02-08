@@ -12,7 +12,7 @@
     </div>
     <div>
       <p>Total Quantity: {{getTotalQuantity()}}</p>
-      <p>Total Sum: {{getTotalSum()}}</p>
+      <p>Total Sum: {{getTotalSum() | currency:'USD':'symbol':'1.0-2'}}</p>
       <button (click)="onRemoveAll()">Remove All</button>
     </div>
   </div>

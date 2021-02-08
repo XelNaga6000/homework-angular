@@ -39,3 +39,4 @@ Added Border directive
 
 08.02.2021
 Fixed task 3 comments
+Added currency pipe to cart-item, cart-list and product components
