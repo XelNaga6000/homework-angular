@@ -12,8 +12,10 @@ const products = [
 })
 export class ProductsService {
 
-  getProducts(): Array<Product> {
-    return products;
+  getProducts(): Promise<Array<Product>> {
+    return new Promise(resolve => {
+      resolve(products);
+    });
   }
 
   constructor() { }
