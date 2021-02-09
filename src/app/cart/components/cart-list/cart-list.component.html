@@ -1,7 +1,17 @@
 <div class="cart-list">
   <h4>Cart</h4>
+  <div>
+    Order By:
+    <select id="orderBy" (change)="onOrderChange($event)">
+      <option id="totalPrice" selected>Price</option>
+      <option id="quantity">Quantity</option>
+      <option id="product.name">Name</option>
+    </select>
+    <label for="isAsc">isAsc</label>
+    <input id="isAsc" type="checkbox" (change)="onAscChange($event)" />
+  </div>
   <div *ngIf="!isEmptyCart(); else elseBlock">
-    <div *ngFor="let item of items; trackBy: trackByProduct">
+    <div *ngFor="let item of items | orderBy:orderByAttribute:isAscOrder; trackBy: trackByProduct">
       <app-cart-item
         [item]="item"
         (increaseCount)="onIncreaseCount($event)"

@@ -14,6 +14,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     CommonModule
   ],
   exports: [
+    CommonModule,
     HighlightDirective,
     BorderDirective,
     OrderByPipe

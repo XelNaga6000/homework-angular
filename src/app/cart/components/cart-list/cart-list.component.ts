@@ -9,6 +9,9 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart-list.component.scss']
 })
 export class CartListComponent implements OnInit {
+  orderByAttribute = 'totalPrice';
+  isAscOrder = false;
+
   get items(): Array<CartItem> {
     return this.cartService.getProducts();
   }
@@ -21,7 +24,18 @@ export class CartListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.items = this.cartService.getProducts();
+  }
+
+  onOrderChange(event: Event): void {
+    const selectEl = (event.target as HTMLSelectElement);
+    const orderBy = selectEl.options[selectEl.selectedIndex].id;
+
+    this.orderByAttribute = orderBy;
+  }
+
+  onAscChange(event: Event): void {
+    const ascEl = (event.target as HTMLInputElement);
+    this.isAscOrder = ascEl.checked;
   }
 
   onIncreaseCount(product: Product): void {

@@ -10,7 +10,6 @@ import { SharedModule } from '../shared/shared.module';
     CartItemComponent
   ],
   imports: [
-    CommonModule,
     SharedModule
   ],
   exports: [

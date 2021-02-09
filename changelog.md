@@ -42,3 +42,6 @@ Fixed task 3 comments
 Added currency pipe to cart-item, cart-list and product components
 Changed getProduct to return Promise; Added async pipe to products-list component
 Added orderBy pipe; Small improvements;
+
+09.02.2021
+Fix string sorting; Used OrderBy pipe in cart-list component; Rearenged modules imports

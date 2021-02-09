@@ -9,7 +9,6 @@ import { SharedModule } from '../shared/shared.module';
     FirstComponent
   ],
   imports: [
-    CommonModule,
     SharedModule
   ],
   exports: [
