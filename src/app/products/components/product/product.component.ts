@@ -9,7 +9,9 @@ import { Product } from '../../models/product.model';
 })
 export class ProductComponent {
   @Input() product: Product;
+  @Input() showControls = true;
   @Output() buyProduct: EventEmitter<Product> = new EventEmitter<Product>();
+
 
   onBuy(): void {
     this.buyProduct.emit(this.product);
@@ -19,5 +21,9 @@ export class ProductComponent {
     if (event.key === '+') {
       this.buyProduct.emit(this.product);
     }
+  }
+
+  constructor() {
+    console.log(this.showControls);
   }
 }

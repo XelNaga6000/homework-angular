@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Categoty, Product } from '../models/product.model';
 
-const products = [
-  new Product('1,', 'Lagavulin', 'Good one', 100, Categoty.Whisky),
+const baseProducts = [
+  new Product('1', 'Lagavulin', 'Good one', 100, Categoty.Whisky),
   new Product('2', 'Aznauri', 'Bad one', 10, Categoty.Wine),
   new Product('3', 'Macallan', 'Rare one', 1000, Categoty.Whisky, false)
 ];
@@ -11,11 +11,14 @@ const products = [
   providedIn: 'root'
 })
 export class ProductsService {
+  private products: Array<Product> = baseProducts;
 
   getProducts(): Promise<Array<Product>> {
-    return new Promise(resolve => {
-      resolve(products);
-    });
+    return Promise.resolve(this.products);
+  }
+
+  getProductById(id: string): Promise<Product> {
+    return Promise.resolve(this.products ? this.products.find(p => p.id === id) : null);
   }
 
   constructor() { }
