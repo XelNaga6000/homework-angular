@@ -1,4 +1,30 @@
+h5, h6 {
+  margin: 0;
+}
+
 .product {
-  padding: 20px;
-  border: 1px solid gray;
+  margin: 10px auto;
+}
+
+.product-header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-price {
+  padding: 0 0 10px 0;
+}
+
+.product-controls {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.error {
+  color: red;
+  font-weight: 600;
 }

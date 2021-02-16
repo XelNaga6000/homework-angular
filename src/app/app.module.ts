@@ -13,10 +13,10 @@ import { CartModule } from './cart/cart.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FirstModule,
     ProductsModule,
-    CartModule
+    CartModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

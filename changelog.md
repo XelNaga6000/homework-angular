@@ -45,3 +45,6 @@ Added orderBy pipe; Small improvements;
 
 09.02.2021
 Fix string sorting; Used OrderBy pipe in cart-list component; Rearenged modules imports
+
+16.02.2021
+Added basic routing; Redesign UI (npm install needed!)

@@ -6,7 +6,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  title = 'Angular Training - Task 2';
+  title = 'BoozeMart';
   @ViewChild('appTitle') titleElement: ElementRef<HTMLHeadingElement>;
 
   ngAfterViewInit(): void {
