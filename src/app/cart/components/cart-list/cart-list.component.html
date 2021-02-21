@@ -40,12 +40,19 @@
     <div class="cart-summary">
       <p>Total Quantity: <span>{{getTotalQuantity()}}</span></p>
       <p>Total Sum: <span>{{getTotalSum() | currency:'USD':'symbol':'1.0-2'}}</span></p>
+    </div>
+    <div class="cart-summary">
       <button class="btn btn-danger" (click)="onRemoveAll()">Remove All</button>
+      <button class="btn btn-primary" routerLink="/products-list">Continue shopping</button>
+      <button class="btn btn-warning" (click)="onCheckout()">Proceed to checkout</button>
     </div>
   </div>
   <ng-template #elseBlock>
     <div class="cart-items empty">
       Cart is empty
+      <div class="cart-summary">
+        <button class="btn btn-primary" routerLink="/products-list">Continue shopping</button>
+      </div>
     </div>
   </ng-template>
 </div>

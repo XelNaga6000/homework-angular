@@ -49,3 +49,6 @@ Fix string sorting; Used OrderBy pipe in cart-list component; Rearenged modules 
 16.02.2021
 Added basic routing; Redesign UI (npm install needed!)
 Added ProductView component; Moved Products routing to Products module
+
+21.02.2021
+Created ProcessOrder component; Added IsEmptyCart guard

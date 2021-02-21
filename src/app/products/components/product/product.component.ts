@@ -24,6 +24,5 @@ export class ProductComponent {
   }
 
   constructor() {
-    console.log(this.showControls);
   }
 }
