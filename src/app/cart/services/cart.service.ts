@@ -70,6 +70,10 @@ export class CartService {
     return this.cartProducts.length === 0 ;
   }
 
+  isProductInCart(id: string) {
+    return !!this.cartProducts.find(ci => ci.product.id === id);
+  }
+
   private changeQuantity(product: Product, quantity: number): void {
     const index = this.cartProducts.findIndex(c => c.product.id === product.id);
 

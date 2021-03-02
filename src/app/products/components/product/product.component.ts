@@ -10,8 +10,8 @@ import { Product } from '../../models/product.model';
 export class ProductComponent {
   @Input() product: Product;
   @Input() showControls = true;
+  @Input() canBuy = true;
   @Output() buyProduct: EventEmitter<Product> = new EventEmitter<Product>();
-
 
   onBuy(): void {
     this.buyProduct.emit(this.product);

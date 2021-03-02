@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { CartService } from './cart/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,14 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 export class AppComponent implements AfterViewInit {
   title = 'BoozeMart';
   @ViewChild('appTitle') titleElement: ElementRef<HTMLHeadingElement>;
+
+  get cartCount() {
+    return this.cartService.getTotalQuantity();
+  }
+
+  constructor(
+    private cartService: CartService
+  ) {}
 
   ngAfterViewInit(): void {
     this.titleElement.nativeElement.innerText = this.title;

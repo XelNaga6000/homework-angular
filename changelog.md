@@ -52,3 +52,6 @@ Added ProductView component; Moved Products routing to Products module
 
 21.02.2021
 Created ProcessOrder component; Added IsEmptyCart guard
+
+02.03.2021
+Improved usability
