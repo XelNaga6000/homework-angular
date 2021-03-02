@@ -1,24 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Categoty, Product } from '../models/product.model';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Category, Product } from '../models/product.model';
 
 const baseProducts = [
-  new Product('1', 'Lagavulin', 'Good one', 100, Categoty.Whisky),
-  new Product('2', 'Aznauri', 'Bad one', 10, Categoty.Wine),
-  new Product('3', 'Macallan', 'Rare one', 1000, Categoty.Whisky, false)
+  new Product('1', 'Lagavulin', 'Good one', 100, Category.Whisky),
+  new Product('2', 'Aznauri', 'Bad one', 10, Category.Wine),
+  new Product('3', 'Macallan', 'Rare one', 1000, Category.Whisky, false)
 ];
+
+const productsListObservable: Observable<Array<Product>> = of(baseProducts);
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
   private products: Array<Product> = baseProducts;
+  products$: Observable<Product[]> = productsListObservable;
 
-  getProducts(): Promise<Array<Product>> {
-    return Promise.resolve(this.products);
+  getProducts(): Observable<Array<Product>> {
+    return this.products$;
   }
 
-  getProductById(id: string): Promise<Product> {
-    return Promise.resolve(this.products ? this.products.find(p => p.id === id) : null);
+  getProductById(id: string): Observable<Product> {
+    return this.products$
+      .pipe(
+        map((products: Array<Product>) => products.find(product => product.id === id)),
+        catchError(err => throwError('Error in getUser method'))
+      );
   }
 
   constructor() { }

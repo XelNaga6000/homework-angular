@@ -1,4 +1,4 @@
-export enum Categoty {
+export enum Category {
   Beer = 1,
   Wine,
   Whisky
@@ -10,7 +10,7 @@ export class Product {
     public name: string,
     public description: string,
     public price: number,
-    public category: Categoty,
+    public category: Category,
     public isAvailable = true
   ) { }
 }

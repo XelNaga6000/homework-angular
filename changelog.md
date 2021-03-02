@@ -56,3 +56,4 @@ Created ProcessOrder component; Added IsEmptyCart guard
 02.03.2021
 Improved usability
 Added admin routes and stub components
+Added edit form and resolve guard

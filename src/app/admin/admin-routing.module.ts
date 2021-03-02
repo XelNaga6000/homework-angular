@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { AdminOrdersListComponent } from './components/admin-orders-list/admin-orders-list.component';
 import { AdminProductFormComponent } from './components/admin-product-form/admin-product-form.component';
 import { AdminProductsListComponent } from './components/admin-products-list/admin-products-list.component';
+import { ProductResolveGuard } from './guards/product-resolve.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: 'products', component: AdminProductsListComponent },
       { path: 'products/add', component: AdminProductFormComponent },
-      { path: 'products/edit/:productID', component: AdminProductFormComponent },
+      { path: 'products/edit/:productID', component: AdminProductFormComponent, resolve: { product: ProductResolveGuard } },
       { path: 'orders', component: AdminOrdersListComponent },
     ]
   }

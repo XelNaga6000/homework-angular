@@ -6,6 +6,7 @@ import { AdminProductsListComponent } from './components/admin-products-list/adm
 import { AdminComponent } from './admin.component';
 import { AdminProductFormComponent } from './components/admin-product-form/admin-product-form.component';
 import { AdminOrdersListComponent } from './components/admin-orders-list/admin-orders-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AdminOrdersListComponent } from './components/admin-orders-list/admin-o
   ],
   imports: [
     SharedModule,
+    FormsModule,
     ProductsModule,
     AdminRoutingModule
   ]
