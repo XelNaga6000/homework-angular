@@ -6,6 +6,10 @@ import { ProductListComponent } from './products/components/product-list/product
 
 const routes: Routes = [
   {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+  },
+  {
     path: 'order',
     canLoad: [IsCartEmptyGuard],
     loadChildren: () => import('./order/order.module').then(m => m.OrderModule),

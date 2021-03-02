@@ -11,6 +11,7 @@ export class ProductComponent {
   @Input() product: Product;
   @Input() showControls = true;
   @Input() canBuy = true;
+  @Input() editPath: string = null;
   @Output() buyProduct: EventEmitter<Product> = new EventEmitter<Product>();
 
   onBuy(): void {

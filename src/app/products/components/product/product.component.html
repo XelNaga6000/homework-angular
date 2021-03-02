@@ -1,42 +1,43 @@
-<div class="row justify-content-sm-center">
-  <div class="col-sm-6">
-    <div class="card product" (keyup)="onKeyUp($event)">
-      <div class="card-header">
-        <div class="product-header">
-          <h5 class="card-title">{{product.name}}</h5>
-          <h6>
-            <span [ngSwitch]="product.category">
-              <span *ngSwitchCase="1">Beer</span>
-              <span *ngSwitchCase="2">Wine</span>
-              <span *ngSwitchCase="3">Whisky</span>
-              <span *ngSwitchDefault>Unknown</span>
-            </span>
-          </h6>
-        </div>
+<div class="card product" (keyup)="onKeyUp($event)">
+  <div class="card-header">
+    <div class="product-header">
+      <h5 class="card-title">{{product.name}}</h5>
+      <h6>
+        <span [ngSwitch]="product.category">
+          <span *ngSwitchCase="1">Beer</span>
+          <span *ngSwitchCase="2">Wine</span>
+          <span *ngSwitchCase="3">Whisky</span>
+          <span *ngSwitchDefault>Unknown</span>
+        </span>
+      </h6>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{product.description}}</p>
+    <div class="product-controls">
+      <div>
+        <button *ngIf="showControls && !editPath" type="button" class="brn btn-warning" routerLink="/products-list/{{product.id}}">View</button>
+        <button *ngIf="editPath" type="button" class="brn btn-warning" routerLink="{{editPath}}">Edit</button>
       </div>
-      <div class="card-body">
-        <p class="card-text">{{product.description}}</p>
-        <div class="product-controls">
-          <button *ngIf="showControls" type="button" class="brn btn-warning" routerLink="../product/{{product.id}}">View</button>
-          <div class="product-buy-controls">
-            <div class="product-price">{{product.price | currency:'USD':'symbol':'1.0-2'}}</div>
-            <ng-template [ngIf]="showControls">
-              <div *ngIf="product.isAvailable; else notInStock">
-                <div *ngIf="canBuy; else inCart">
-                  <button type="button" class="brn btn-primary" (click)="onBuy()">Buy</button>
-                </div>
-                <ng-template #inCart>
-                  <button type="button" class="brn btn-success" routerLink="../cart">In Cart</button>
-                </ng-template>
+      <div class="product-buy-controls">
+        <div class="product-price">{{product.price | currency:'USD':'symbol':'1.0-2'}}</div>
+        <ng-template [ngIf]="showControls">
+          <div *ngIf="product.isAvailable; else notInStock">
+            <div *ngIf="canBuy; else inCart">
+              <button type="button" class="brn btn-primary" (click)="onBuy()">Buy</button>
+            </div>
+            <ng-template #inCart>
+              <div *ngIf="!editPath">
+                <button type="button" class="brn btn-success" routerLink="../cart">In Cart</button>
               </div>
-              <ng-template #notInStock>
-                <div class="error">
-                  Not in Stock
-                </div>
-              </ng-template>
             </ng-template>
           </div>
-        </div>
+          <ng-template #notInStock>
+            <div class="error">
+              Not in Stock
+            </div>
+          </ng-template>
+        </ng-template>
       </div>
     </div>
   </div>

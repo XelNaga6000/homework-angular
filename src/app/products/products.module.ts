@@ -14,6 +14,9 @@ import { ProductsRoutingModule } from './products-routing.module';
   imports: [
     SharedModule,
     ProductsRoutingModule
+  ],
+  exports: [
+    ProductComponent
   ]
 })
 export class ProductsModule { }

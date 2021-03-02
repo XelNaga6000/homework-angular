@@ -24,7 +24,7 @@ export class ProductListComponent implements OnInit {
     this.cartService.addProduct(product, 1);
   }
 
-  isProductInCart(product) {
+  isProductInCart(product): boolean {
     return this.cartService.isProductInCart(product.id);
   }
 }

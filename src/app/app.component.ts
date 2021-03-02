@@ -10,7 +10,7 @@ export class AppComponent implements AfterViewInit {
   title = 'BoozeMart';
   @ViewChild('appTitle') titleElement: ElementRef<HTMLHeadingElement>;
 
-  get cartCount() {
+  get cartCount(): number {
     return this.cartService.getTotalQuantity();
   }
 

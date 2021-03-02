@@ -70,7 +70,7 @@ export class CartService {
     return this.cartProducts.length === 0 ;
   }
 
-  isProductInCart(id: string) {
+  isProductInCart(id: string): boolean {
     return !!this.cartProducts.find(ci => ci.product.id === id);
   }
 
