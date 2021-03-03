@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './core/guards/auth.guard';
 import { IsCartEmptyGuard } from './core/guards/is-cart-empty.guard';
 import { FirstComponent } from './first/components/first/first.component';
-import { ProductListComponent } from './products/components/product-list/product-list.component';
+import { LoginComponent, PathNotFoundComponent } from './layout';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'admin',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
   },
   {
@@ -25,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: ProductListComponent
+    component: PathNotFoundComponent
   }
 ];
 

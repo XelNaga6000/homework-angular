@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../core/guards/auth.guard';
 import { CanDeactivateGuard } from '../core/guards/can-deactivate.guard';
 import { AdminComponent } from './admin.component';
 import { AdminOrdersListComponent } from './components/admin-orders-list/admin-orders-list.component';
@@ -11,11 +12,34 @@ const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: 'products', component: AdminProductsListComponent },
-      { path: 'products/add', component: AdminProductFormComponent, resolve: { product: ProductResolveGuard } },
-      { path: 'products/edit/:productID', component: AdminProductFormComponent, canDeactivate: [CanDeactivateGuard], resolve: { product: ProductResolveGuard } },
-      { path: 'orders', component: AdminOrdersListComponent },
+      {
+        path: '',
+        canActivateChild: [AuthGuard],
+        children: [
+          {
+            path: 'products',
+            component: AdminProductsListComponent
+          },
+          {
+            path: 'products/add',
+            component: AdminProductFormComponent,
+            resolve: { product: ProductResolveGuard } // for default values set in one place
+          },
+          {
+            path: 'products/edit/:productID',
+            component: AdminProductFormComponent,
+            canDeactivate: [CanDeactivateGuard],
+            resolve: { product: ProductResolveGuard
+            }
+          },
+          {
+            path: 'orders',
+            component: AdminOrdersListComponent
+          },
+        ]
+      }
     ]
   }
 ];

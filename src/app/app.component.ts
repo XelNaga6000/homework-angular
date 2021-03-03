@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CartService } from './cart/services/cart.service';
+import { Role } from './core/enums/role';
+import { AuthService } from './core/services/auth.service';
 import { SpinnerService } from './widgets';
 
 @Component({
@@ -17,10 +19,15 @@ export class AppComponent implements AfterViewInit {
 
   constructor(
     private cartService: CartService,
-    public spinnerService: SpinnerService
+    private authService: AuthService,
+    public spinnerService: SpinnerService,
   ) {}
 
   ngAfterViewInit(): void {
     this.titleElement.nativeElement.innerText = this.title;
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn && this.authService.role === Role.Admin;
   }
 }

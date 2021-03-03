@@ -7,6 +7,7 @@ import { FirstModule } from './first/first.module';
 import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { SpinnerModule } from './widgets/spinner/spinner.module';
+import { LayoutModule } from './layout/layout.module';
 // import { Router } from '@angular/router';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SpinnerModule } from './widgets/spinner/spinner.module';
     FirstModule,
     ProductsModule,
     CartModule,
+    LayoutModule,
     SpinnerModule.forRoot(),
     AppRoutingModule
   ],
