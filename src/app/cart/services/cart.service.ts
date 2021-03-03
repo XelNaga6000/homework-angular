@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { localStorageInstance, LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { Product } from '../../products/models/product.model';
 import { CartItem } from '../models/cart-item.model';
 
@@ -10,7 +11,19 @@ export class CartService {
   private totalQuantity = 0;
   private totalSum = 0;
 
-  constructor() { }
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {
+    this.totalQuantity = +this.localStorageService.getValue('totalQuantity') || 0;
+    this.totalSum = +this.localStorageService.getValue('totalSum') || 0;
+
+    try {
+      const products = this.localStorageService.getValue('cartProducts');
+      this.cartProducts = products ? JSON.parse(products) : [];
+    } catch {
+      this.cartProducts = [];
+    }
+  }
 
   getProducts(): Array<CartItem> {
     return this.cartProducts;
@@ -89,5 +102,9 @@ export class CartService {
   private updateCartData(): void {
     this.totalQuantity = this.cartProducts.reduce((acc, val) => acc + val.quantity, 0);
     this.totalSum = this.cartProducts.reduce((acc, val) => acc + (val.quantity * val.product.price), 0);
+
+    this.localStorageService.setValue('totalQuantity', this.totalQuantity);
+    this.localStorageService.setValue('totalSum', this.totalSum);
+    this.localStorageService.setValue('cartProducts', JSON.stringify(this.cartProducts));
   }
 }

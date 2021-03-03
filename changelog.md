@@ -62,3 +62,4 @@ Added edit form and resolve guard
 Added edit/add possibility for admin; Added spinner
 Added CanDeactivate guard
 Added auth service and Roles enum; Added CanLoad and CanActivate guards to admin module
+Added localstorage support for Cart service
