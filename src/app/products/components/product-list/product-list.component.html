@@ -1,3 +1,7 @@
 <div *ngFor="let product of products | async;">
-  <app-product [product]="product" (buyProduct)="onBuyProduct($event)"></app-product>
+  <div class="row justify-content-sm-center">
+    <div class="col-sm-6">
+      <app-product [product]="product" (buyProduct)="onBuyProduct($event)" [canBuy]="!isProductInCart(product)"></app-product>
+    </div>
+  </div>
 </div>

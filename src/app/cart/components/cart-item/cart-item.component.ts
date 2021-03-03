@@ -3,7 +3,7 @@ import { Product } from 'src/app/products/models/product.model';
 import { CartItem } from '../../models/cart-item.model';
 
 @Component({
-  selector: 'app-cart-item',
+  selector: 'app-cart-item, [app-cart-item]',
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss'],
   // Since item.count could be incremented from ProductItem component - OnPush strategy will not work here.

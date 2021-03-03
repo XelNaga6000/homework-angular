@@ -1,4 +1,25 @@
-<h1 #appTitle></h1>
-<app-first></app-first>
-<app-product-list></app-product-list>
-<app-cart-list></app-cart-list>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand"  routerLinkActive="active" routerLink="/products-list" #appTitle>App Title</a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/admin/products">Admin{{isLoggedIn() ? '*' : ''}}</a>
+      </li>
+    </ul>
+    <div class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/cart">Cart {{cartCount > 0 ? '(' + cartCount + ')' : ''}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/login">Login</a>
+      </li>
+    </div>
+</nav>
+<main>
+  <div class="container-lg">
+    <app-spinner *ngIf="spinnerService.isVisible(); else showContent"></app-spinner>
+    <ng-template #showContent>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </div>
+</main>

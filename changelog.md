@@ -45,3 +45,21 @@ Added orderBy pipe; Small improvements;
 
 09.02.2021
 Fix string sorting; Used OrderBy pipe in cart-list component; Rearenged modules imports
+
+16.02.2021
+Added basic routing; Redesign UI (npm install needed!)
+Added ProductView component; Moved Products routing to Products module
+
+21.02.2021
+Created ProcessOrder component; Added IsEmptyCart guard
+
+02.03.2021
+Improved usability
+Added admin routes and stub components
+Added edit form and resolve guard
+
+03.03.2021
+Added edit/add possibility for admin; Added spinner
+Added CanDeactivate guard
+Added auth service and Roles enum; Added CanLoad and CanActivate guards to admin module
+Added localstorage support for Cart service

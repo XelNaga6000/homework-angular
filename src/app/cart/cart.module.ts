@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CartListComponent } from './components/cart-list/cart-list.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { SharedModule } from '../shared/shared.module';
+import { CartRoutingModule } from './cart-routing.module';
+import { localStorageInstance, LocalStorageService } from '../core/services/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -10,10 +11,14 @@ import { SharedModule } from '../shared/shared.module';
     CartItemComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    CartRoutingModule
   ],
   exports: [
     CartListComponent
+  ],
+  providers: [
+    { provide: LocalStorageService, useValue: localStorageInstance }
   ]
 })
 export class CartModule { }

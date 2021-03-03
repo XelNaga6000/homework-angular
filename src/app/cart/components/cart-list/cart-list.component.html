@@ -1,34 +1,58 @@
 <div class="cart-list">
-  <h4>Cart</h4>
-  <div>
-    Order By:
-    <select id="orderBy" (change)="onOrderChange($event)">
+  <div class="cart-controls form-inline">
+    <label class="my-1 mr-2" for="orderBy">Order By:</label>
+    <select class="custom-select my-1 mr-sm-2" id="orderBy" (change)="onOrderChange($event)">
       <option id="totalPrice" selected>Price</option>
       <option id="quantity">Quantity</option>
       <option id="product.name">Name</option>
     </select>
-    <label for="isAsc">isAsc</label>
-    <input id="isAsc" type="checkbox" (change)="onAscChange($event)" />
-  </div>
-  <div *ngIf="!isEmptyCart(); else elseBlock">
-    <div *ngFor="let item of items | orderBy:orderByAttribute:isAscOrder; trackBy: trackByProduct">
-      <app-cart-item
-        [item]="item"
-        (increaseCount)="onIncreaseCount($event)"
-        (decreaseCount)="onDecreaseCount($event)"
-        (removeProduct)="onRemoveProduct($event)"
-      >
-      </app-cart-item>
+  
+    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+      <input type="checkbox" (change)="onAscChange($event)" class="custom-control-input" id="isAsc">
+      <label class="custom-control-label" for="isAsc">isAsc</label>
     </div>
-    <div>
-      <p>Total Quantity: {{getTotalQuantity()}}</p>
-      <p>Total Sum: {{getTotalSum() | currency:'USD':'symbol':'1.0-2'}}</p>
-      <button (click)="onRemoveAll()">Remove All</button>
+  </div>
+  <div class="cart-items" *ngIf="!isEmptyCart(); else elseBlock">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of items | orderBy:orderByAttribute:isAscOrder; trackBy: trackByProduct">
+          <tr app-cart-item
+            
+          [ngClass]="{'cart-item': true, 'highlight': false}"
+          appHighlight
+          class="cart-item" 
+            [item]="item"
+            (increaseCount)="onIncreaseCount($event)"
+            (decreaseCount)="onDecreaseCount($event)"
+            (removeProduct)="onRemoveProduct($event)"
+          ></tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <div class="cart-summary">
+      <p>Total Quantity: <span>{{getTotalQuantity()}}</span></p>
+      <p>Total Sum: <span>{{getTotalSum() | currency:'USD':'symbol':'1.0-2'}}</span></p>
+    </div>
+    <div class="cart-summary">
+      <button class="btn btn-danger" (click)="onRemoveAll()">Remove All</button>
+      <button class="btn btn-primary" routerLink="/products-list">Continue shopping</button>
+      <button class="btn btn-warning" (click)="onCheckout()">Proceed to checkout</button>
     </div>
   </div>
   <ng-template #elseBlock>
-    <div>
+    <div class="cart-items empty">
       Cart is empty
+      <div class="cart-summary">
+        <button class="btn btn-primary" routerLink="/products-list">Continue shopping</button>
+      </div>
     </div>
   </ng-template>
 </div>

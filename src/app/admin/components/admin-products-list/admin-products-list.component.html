@@ -1,0 +1,11 @@
+<div class="row justify-content-sm-center">
+    <button type="button" class="brn btn-primary" routerLink="/admin/products/add">Add</button>
+    <button type="button" class="brn btn-primary" routerLink="/admin/orders">Orders</button>
+</div>
+<div *ngFor="let product of products | async;">
+  <div class="row justify-content-sm-center">
+    <div class="col-sm-6">
+      <app-product [product]="product" [canBuy]="false" [editPath]="'/admin/products/edit/' + product.id"></app-product>
+    </div>
+  </div>
+</div>

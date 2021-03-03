@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CartService } from 'src/app/cart/services/cart.service';
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
@@ -9,7 +10,7 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  products: Promise<Array<Product>>;
+  products: Observable<Array<Product>>;
 
   constructor(
     private productsService: ProductsService,
@@ -22,5 +23,9 @@ export class ProductListComponent implements OnInit {
 
   onBuyProduct(product: Product): void {
     this.cartService.addProduct(product, 1);
+  }
+
+  isProductInCart(product): boolean {
+    return this.cartService.isProductInCart(product.id);
   }
 }
