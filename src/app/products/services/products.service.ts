@@ -30,5 +30,17 @@ export class ProductsService {
       );
   }
 
+  createProduct(product: Product): void {
+    baseProducts.push(product);
+  }
+
+  updateProduct(product: Product): void {
+    const i = baseProducts.findIndex(u => u.id === product.id);
+
+    if (i > -1) {
+      baseProducts.splice(i, 1, product);
+    }
+  }
+
   constructor() { }
 }

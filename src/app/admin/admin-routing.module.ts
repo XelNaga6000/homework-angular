@@ -12,7 +12,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'products', component: AdminProductsListComponent },
-      { path: 'products/add', component: AdminProductFormComponent },
+      { path: 'products/add', component: AdminProductFormComponent, resolve: { product: ProductResolveGuard } },
       { path: 'products/edit/:productID', component: AdminProductFormComponent, resolve: { product: ProductResolveGuard } },
       { path: 'orders', component: AdminOrdersListComponent },
     ]

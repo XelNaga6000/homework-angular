@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CartService } from './cart/services/cart.service';
+import { SpinnerService } from './widgets';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent implements AfterViewInit {
   }
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    public spinnerService: SpinnerService
   ) {}
 
   ngAfterViewInit(): void {

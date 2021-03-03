@@ -12,6 +12,9 @@
 </nav>
 <main>
   <div class="container-lg">
-    <router-outlet></router-outlet>
+    <app-spinner *ngIf="spinnerService.isVisible(); else showContent"></app-spinner>
+    <ng-template #showContent>
+      <router-outlet></router-outlet>
+    </ng-template>
   </div>
 </main>

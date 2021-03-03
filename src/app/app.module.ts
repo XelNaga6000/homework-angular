@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FirstModule } from './first/first.module';
 import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
+import { SpinnerModule } from './widgets/spinner/spinner.module';
 // import { Router } from '@angular/router';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CartModule } from './cart/cart.module';
     FirstModule,
     ProductsModule,
     CartModule,
+    SpinnerModule.forRoot(),
     AppRoutingModule
   ],
   providers: [],
