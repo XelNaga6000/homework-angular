@@ -60,3 +60,4 @@ Added edit form and resolve guard
 
 03.03.2021
 Added edit/add possibility for admin; Added spinner
+Added CanDeactivate guard

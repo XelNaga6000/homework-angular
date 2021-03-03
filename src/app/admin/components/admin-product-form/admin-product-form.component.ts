@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
 import { pluck } from 'rxjs/operators';
+import { CanComponentDeactivate } from 'src/app/core/interfaces/can-component-deactivate.interface';
+import { DialogService } from 'src/app/core/services/dialog.service';
 import { generatedString, GeneratorFactory, GeneratorService } from 'src/app/core/services/generator.service';
 import { Product } from 'src/app/products/models/product.model';
 import { ProductsService } from 'src/app/products/services/products.service';
@@ -14,7 +17,7 @@ import { ProductsService } from 'src/app/products/services/products.service';
     { provide: generatedString, useFactory: GeneratorFactory(10), deps: [GeneratorService] },
   ]
 })
-export class AdminProductFormComponent implements OnInit {
+export class AdminProductFormComponent implements OnInit, CanComponentDeactivate {
   product: Product;
   originalProduct: Product;
 
@@ -22,7 +25,8 @@ export class AdminProductFormComponent implements OnInit {
     @Inject(generatedString) public newID: string,
     private productsService: ProductsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -50,5 +54,26 @@ export class AdminProductFormComponent implements OnInit {
 
   onGoBack(): void {
     this.router.navigate(['/admin/products']);
+  }
+
+  canDeactivate():
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    const flags = Object.keys(this.originalProduct).map(key => {
+      if (this.originalProduct[key] === this.product[key]) {
+        return true;
+      }
+      return false;
+    });
+
+    if (flags.every(el => el)) {
+      return true;
+    }
+
+    // Otherwise ask the user with the dialog service and return its
+    // promise which resolves to true or false when the user decides
+    return this.dialogService.confirm('Discard changes?');
   }
 }

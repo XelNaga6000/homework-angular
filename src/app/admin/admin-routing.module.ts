@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CanDeactivateGuard } from '../core/guards/can-deactivate.guard';
 import { AdminComponent } from './admin.component';
 import { AdminOrdersListComponent } from './components/admin-orders-list/admin-orders-list.component';
 import { AdminProductFormComponent } from './components/admin-product-form/admin-product-form.component';
@@ -13,7 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'products', component: AdminProductsListComponent },
       { path: 'products/add', component: AdminProductFormComponent, resolve: { product: ProductResolveGuard } },
-      { path: 'products/edit/:productID', component: AdminProductFormComponent, resolve: { product: ProductResolveGuard } },
+      { path: 'products/edit/:productID', component: AdminProductFormComponent, canDeactivate: [CanDeactivateGuard], resolve: { product: ProductResolveGuard } },
       { path: 'orders', component: AdminOrdersListComponent },
     ]
   }
