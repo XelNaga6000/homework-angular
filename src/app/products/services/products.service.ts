@@ -1,46 +1,71 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { Category, Product } from '../models/product.model';
-
-const baseProducts = [
-  new Product('1', 'Lagavulin', 'Good one', 100, Category.Whisky),
-  new Product('2', 'Aznauri', 'Bad one', 10, Category.Wine),
-  new Product('3', 'Macallan', 'Rare one', 1000, Category.Whisky, false)
-];
-
-const productsListObservable: Observable<Array<Product>> = of(baseProducts);
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  private products: Array<Product> = baseProducts;
-  products$: Observable<Product[]> = productsListObservable;
+  private productsUrl = 'http://localhost:3333/products';
+
+  constructor(
+    private http: HttpClient
+  ) {}
 
   getProducts(): Observable<Array<Product>> {
-    return this.products$;
+    return this.http.get<Array<Product>>(this.productsUrl).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getProductById(id: string): Observable<Product> {
-    return this.products$
+    const url = `${this.productsUrl}/${id}`;
+
+    return this.http.get<Product>(url)
       .pipe(
-        map((products: Array<Product>) => products.find(product => product.id === id)),
-        catchError(err => throwError('Error in getUser method'))
+        retry(3),
+        catchError(this.handleError)
       );
   }
 
-  createProduct(product: Product): void {
-    baseProducts.push(product);
+  createProduct(product: Product): Observable<Product> {
+    const url = this.productsUrl;
+    const body = JSON.stringify(product);
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http
+      .post<Product>(url, body, options)
+      .pipe(
+        catchError( this.handleError )
+      );
   }
 
-  updateProduct(product: Product): void {
-    const i = baseProducts.findIndex(u => u.id === product.id);
+  updateProduct(product: Product): Observable<Product> {
+    const url = `${this.productsUrl}/${product.id}`;
+    const body = JSON.stringify(product);
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
-    if (i > -1) {
-      baseProducts.splice(i, 1, product);
+    return this.http
+      .put<Product>(url, body, options)
+      .pipe( catchError(this.handleError) );
+  }
+
+  private handleError(err: HttpErrorResponse): Observable<never> {
+    // A client-side or network error occurred.
+    if (err.error instanceof Error) {
+      console.error('An error occurred:', err.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(`Backend returned code ${err.status}, body was: ${err.error}`);
     }
-  }
 
-  constructor() { }
+    return throwError('Something bad happened; please try again later.');
+  }
 }

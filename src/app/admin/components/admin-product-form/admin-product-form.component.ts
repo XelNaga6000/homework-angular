@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { CanComponentDeactivate } from 'src/app/core/interfaces/can-component-deactivate.interface';
 import { DialogService } from 'src/app/core/services/dialog.service';
@@ -20,6 +20,7 @@ import { ProductsService } from 'src/app/products/services/products.service';
 export class AdminProductFormComponent implements OnInit, CanComponentDeactivate {
   product: Product;
   originalProduct: Product;
+  private sub: Subscription;
 
   constructor(
     @Inject(generatedString) public newID: string,
@@ -39,17 +40,19 @@ export class AdminProductFormComponent implements OnInit, CanComponentDeactivate
   onSaveProduct(): void {
     const product = { ...this.product };
 
+    const observer = {
+      next: (savedProduct: Product) => {
+        this.originalProduct = { ...savedProduct };
+        this.onGoBack();
+      },
+      error: (err: any) => console.log(err)
+    };
+
     if (product.id) {
-      this.productsService.updateProduct(product);
-      this.router.navigate(['/admin/products']);
+      this.sub = this.productsService.updateProduct(product).subscribe(observer);
     } else {
-      this.productsService.createProduct({
-        ...product,
-        id: this.newID
-      });
-      this.onGoBack();
+      this.sub = this.productsService.createProduct(product).subscribe(observer);
     }
-    this.originalProduct = { ...this.product };
   }
 
   onGoBack(): void {

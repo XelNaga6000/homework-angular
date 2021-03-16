@@ -8,6 +8,7 @@ import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { SpinnerModule } from './widgets/spinner/spinner.module';
 import { LayoutModule } from './layout/layout.module';
+import { HttpClientModule } from '@angular/common/http';
 // import { Router } from '@angular/router';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { LayoutModule } from './layout/layout.module';
     CartModule,
     LayoutModule,
     SpinnerModule.forRoot(),
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
