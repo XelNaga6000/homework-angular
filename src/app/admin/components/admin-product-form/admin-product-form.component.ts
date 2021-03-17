@@ -51,7 +51,10 @@ export class AdminProductFormComponent implements OnInit, CanComponentDeactivate
     if (product.id) {
       this.sub = this.productsService.updateProduct(product).subscribe(observer);
     } else {
-      this.sub = this.productsService.createProduct(product).subscribe(observer);
+      this.sub = this.productsService.createProduct({
+        ...product,
+        id: this.newID
+      }).subscribe(observer);
     }
   }
 

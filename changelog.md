@@ -67,3 +67,6 @@ Added localstorage support for Cart service
 16.03.2021
 Added json server and concurrently
 Changed products service to work with server using Observable pattern
+
+17.03.2021
+Created orders service and make it work with server using Promise pattern

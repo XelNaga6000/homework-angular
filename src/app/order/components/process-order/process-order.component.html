@@ -1,1 +1,74 @@
-<p>process-order works!</p>
+<div class="row justify-content-sm-center">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-header">
+          <h4 class="card-title">
+              Buyer info
+          </h4>
+      </div>
+      <div class="card-body">
+          <form (ngSubmit)="onSaveOrder()" id="order-form" #form="ngForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" 
+                  class="form-control" 
+                  id="name" name="name"
+                  placeholder="Name"
+                  required
+                  [(ngModel)]="order.name">
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" 
+                  class="form-control" 
+                  id="address" name="address"
+                  placeholder="Address"
+                  required
+                  [(ngModel)]="order.address">
+            </div>
+          <div class="controls">
+            <button class="btn btn-secondary"
+              type="button"
+              (click)="onGoBack()">Back
+            </button>
+            <button 
+              type="submit" 
+              class="btn btn-primary"
+              [disabled]="form.invalid">Buy
+            </button>
+          </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-header">
+          <h4 class="card-title">
+              Order
+          </h4>
+      </div>
+      <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of order.cartItems; trackBy: trackByProductId">
+                <tr>
+                  <th scope="row">{{item.product.name}}</th>
+                  <td>{{item.quantity}}</td>
+                  <td>{{item.totalPrice | currency:'USD':'symbol':'1.0-2'}}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
