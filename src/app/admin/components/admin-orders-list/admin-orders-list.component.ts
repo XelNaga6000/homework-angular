@@ -14,7 +14,7 @@ export class AdminOrdersListComponent implements OnInit {
     private orderService: OrderService
   ) { }
 
-  trackByProductId(index: number, order: Order): string {
+  trackById(index: number, order: Order): string {
     return order.id;
   }
 
