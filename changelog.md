@@ -74,3 +74,4 @@ Added TimingInterceptor for products reuests
 
 18.03.2021
 Added AppSettings service
+Removed obsolet comments
