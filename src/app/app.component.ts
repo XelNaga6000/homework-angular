@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CartService } from './cart/services/cart.service';
 import { Role } from './core/enums/role';
+import { AppSettingsService } from './core/services/app-settings.service';
 import { AuthService } from './core/services/auth.service';
 import { SpinnerService } from './widgets';
 
@@ -10,7 +11,6 @@ import { SpinnerService } from './widgets';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  title = 'BoozeMart';
   @ViewChild('appTitle') titleElement: ElementRef<HTMLHeadingElement>;
 
   get cartCount(): number {
@@ -20,11 +20,14 @@ export class AppComponent implements AfterViewInit {
   constructor(
     private cartService: CartService,
     private authService: AuthService,
+    private appSettingsService: AppSettingsService,
     public spinnerService: SpinnerService,
   ) {}
 
   ngAfterViewInit(): void {
-    this.titleElement.nativeElement.innerText = this.title;
+    this.appSettingsService.getSettings().subscribe(settings => {
+      this.titleElement.nativeElement.innerText = settings.appName;
+    });
   }
 
   isLoggedIn(): boolean {

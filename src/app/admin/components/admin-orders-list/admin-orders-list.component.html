@@ -1,1 +1,29 @@
-<p>admin-orders-list works!</p>
+<div class="card">
+  <div class="card-header">
+      <h4 class="card-title">
+          Orders
+      </h4>
+  </div>
+  <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Total Sum</th>
+            <th scope="col">Buyer Name</th>
+            <th scope="col">Buyer Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let order of orders; trackBy: trackById">
+            <tr>
+              <th scope="row">{{order.id}}</th>
+              <td>{{order.totalSum | currency:'USD':'symbol':'1.0-2'}}</td>
+              <td>{{order.name}}</td>
+              <td>{{order.address}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+  </div>
+</div>

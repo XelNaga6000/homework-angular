@@ -6,9 +6,6 @@ import { CartItem } from '../../models/cart-item.model';
   selector: 'app-cart-item, [app-cart-item]',
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss'],
-  // Since item.count could be incremented from ProductItem component - OnPush strategy will not work here.
-  // Dont know how to trigger it manually
-  // либо не использовать, либо внедрять зависимость ChangeDetectorRef и вызывать его методы
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartItemComponent {

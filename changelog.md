@@ -63,3 +63,15 @@ Added edit/add possibility for admin; Added spinner
 Added CanDeactivate guard
 Added auth service and Roles enum; Added CanLoad and CanActivate guards to admin module
 Added localstorage support for Cart service
+
+16.03.2021
+Added json server and concurrently
+Changed products service to work with server using Observable pattern
+
+17.03.2021
+Created orders service and make it work with server using Promise pattern
+Added TimingInterceptor for products reuests
+
+18.03.2021
+Added AppSettings service
+Removed obsolet comments
