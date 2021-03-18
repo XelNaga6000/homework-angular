@@ -18,7 +18,7 @@ export class TimingInterceptor implements HttpInterceptor {
       filter((event: HttpEvent<any>) => event.type === HttpEventType.Response),
       map((event: HttpResponse<any>) => {
         if (event.url.includes('products')) {
-          console.log(`TimingInterceptor: ${event.url} - ${Date.now() - requestTs}ms`)
+          console.log(`TimingInterceptor: ${event.url} - ${Date.now() - requestTs}ms`);
         }
         return event;
       })

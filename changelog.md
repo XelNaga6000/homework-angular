@@ -71,3 +71,6 @@ Changed products service to work with server using Observable pattern
 17.03.2021
 Created orders service and make it work with server using Promise pattern
 Added TimingInterceptor for products reuests
+
+18.03.2021
+Added AppSettings service

@@ -20,8 +20,8 @@ export class AdminOrdersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getOrders()
-      .then((orders) => { this.orders = orders })
-      .catch(e => { console.log(e)});
+      .then((orders) => { this.orders = orders; })
+      .catch(e => { console.log(e); });
   }
 
 }
