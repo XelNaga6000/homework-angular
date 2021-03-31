@@ -75,3 +75,6 @@ Added TimingInterceptor for products reuests
 18.03.2021
 Added AppSettings service
 Removed obsolet comments
+
+31.03.2021
+Fixed bug with empty app-settings.json

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 // rxjs
 import { Observable, of } from 'rxjs';
-import { catchError, retry, share, tap } from 'rxjs/operators';
+import { catchError, retry, tap, map } from 'rxjs/operators';
 import { AppSettings } from '../interfaces/app-settings.interface';
 import { LocalStorageService } from './local-storage.service';
 
@@ -29,15 +29,21 @@ export class AppSettingsService {
     } else {
       return this.http.get<AppSettings>('assets/app-settings.json').pipe(
         retry(2),
-        tap((assetsSettings) => {
+        map((assetsSettings) => {
+          if (!assetsSettings) {
+            console.log('AppSettingsService: app-settings.json corrupted, reading defaults', this.defaultSettings);
+            return this.defaultSettings;
+          }
+
           console.log('AppSettingsService: app-settings.json found', assetsSettings);
+          return assetsSettings;
+        }),
+        tap((assetsSettings) => {
+          console.log('AppSettingsService: saving settings to localStorage', assetsSettings);
           this.localStorageService.setValue('app-settings', JSON.stringify(assetsSettings));
         }),
-        // Этот оператор отреагирует на проблему загрузки,
-        // но если загрузка будет успешна, а данных в файле не будет по какой-то причине,
-        // то этот оператор не сработает. 
-        catchError(() => {
-          console.log('AppSettingsService: app-settings.json not found, reading defaults', this.defaultSettings);
+        catchError((e) => {
+          console.log('AppSettingsService: Error on getting settings', e, 'Reading defaults', this.defaultSettings);
           this.localStorageService.setValue('app-settings', JSON.stringify(this.defaultSettings));
           return of(this.defaultSettings);
         })
