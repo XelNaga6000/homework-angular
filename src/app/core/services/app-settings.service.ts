@@ -33,6 +33,9 @@ export class AppSettingsService {
           console.log('AppSettingsService: app-settings.json found', assetsSettings);
           this.localStorageService.setValue('app-settings', JSON.stringify(assetsSettings));
         }),
+        // Этот оператор отреагирует на проблему загрузки,
+        // но если загрузка будет успешна, а данных в файле не будет по какой-то причине,
+        // то этот оператор не сработает. 
         catchError(() => {
           console.log('AppSettingsService: app-settings.json not found, reading defaults', this.defaultSettings);
           this.localStorageService.setValue('app-settings', JSON.stringify(this.defaultSettings));
