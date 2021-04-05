@@ -10,6 +10,7 @@ import { SpinnerModule } from './widgets/spinner/spinner.module';
 import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TimingInterceptor } from './core/interceptors/timing.interceptor';
+import { RootStoreModule } from './core/@ngrx/root-store.module';
 // import { Router } from '@angular/router';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TimingInterceptor } from './core/interceptors/timing.interceptor';
     LayoutModule,
     SpinnerModule.forRoot(),
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RootStoreModule
   ],
   providers: [
     {

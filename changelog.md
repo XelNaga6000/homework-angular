@@ -78,3 +78,6 @@ Removed obsolet comments
 
 31.03.2021
 Fixed bug with empty app-settings.json
+
+05.04.2021
+Added ngrx; Added Products store

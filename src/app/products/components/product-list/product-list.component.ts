@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartService } from 'src/app/cart/services/cart.service';
-import { Product } from '../../models/product.model';
+import { ProductsFacade } from 'src/app/core/@ngrx/products';
+import { IProduct, Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
@@ -10,15 +11,17 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  products: Observable<Array<Product>>;
+  products$: Observable<ReadonlyArray<IProduct>>;
+  productsError$: Observable<Error | string>;
 
   constructor(
-    private productsService: ProductsService,
+    private productsFacade: ProductsFacade,
     private cartService: CartService
   ) {}
 
   ngOnInit(): void {
-    this.products = this.productsService.getProducts();
+    this.products$ = this.productsFacade.products$;
+    this.productsError$ = this.productsFacade.productsError$;
   }
 
   onBuyProduct(product: Product): void {
