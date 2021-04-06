@@ -20,7 +20,7 @@ export class ProductsEffects {
   ) {
   }
 
-  getProducts$: Observable<Action> = createEffect(() => 
+  getProducts$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(ProductsActions.getProducts),
       switchMap(action =>

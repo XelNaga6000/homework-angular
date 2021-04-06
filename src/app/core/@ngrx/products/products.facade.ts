@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import {
   selectProductsData,
-  selectProductsError
+  selectProductsError,
+  selectProductsLoaded
 } from './products.selectors';
 import * as ProductsActions from './../../../core/@ngrx/products/products.actions';
 
@@ -19,13 +20,16 @@ import { IProduct } from './../../../products/models/product.model';
 export class ProductsFacade {
   products$: Observable<ReadonlyArray<IProduct>>;
   productsError$: Observable<Error | string>;
+  productsLoaded$: Observable<boolean>;
 
   constructor(private store: Store) {
-    // TODO: find a better place for this
-    store.dispatch(ProductsActions.getProducts());
-
-    this.products$ = this.store.select(selectProductsData);
     this.productsError$ = this.store.select(selectProductsError);
+    this.productsLoaded$ = this.store.select(selectProductsLoaded);
+    this.products$ = this.store.select(selectProductsData);
+  }
+
+  loadProducts(): void {
+    this.store.dispatch(ProductsActions.getProducts());
   }
 
   createProduct(props: { product: IProduct }): void {

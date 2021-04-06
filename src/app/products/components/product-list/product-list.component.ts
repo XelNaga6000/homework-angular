@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartService } from 'src/app/cart/services/cart.service';
 import { ProductsFacade } from 'src/app/core/@ngrx/products';
 import { IProduct, Product } from '../../models/product.model';
-import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-list',
@@ -22,6 +21,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.products$ = this.productsFacade.products$;
     this.productsError$ = this.productsFacade.productsError$;
+
+    this.productsFacade.loadProducts();
   }
 
   onBuyProduct(product: Product): void {

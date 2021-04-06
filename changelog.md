@@ -81,3 +81,6 @@ Fixed bug with empty app-settings.json
 
 05.04.2021
 Added ngrx; Added Products store
+
+06.04.2021
+Connect Products store with components via facade
