@@ -59,6 +59,14 @@ export class ProductsService {
       .pipe( catchError(this.handleError) );
   }
 
+  deleteProduct(product: Product): Observable<Product> {
+    const url = `${this.productsUrl}/${product.id}`;
+
+    return this.http
+      .delete<Product>(url)
+      .pipe( catchError(this.handleError) );
+  }
+
   private handleError(err: HttpErrorResponse): Observable<never> {
     // A client-side or network error occurred.
     if (err.error instanceof Error) {

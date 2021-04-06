@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/cart/models/cart-item.model';
 import { CartService } from 'src/app/cart/services/cart.service';
+import { RouterFacade } from 'src/app/core/@ngrx/router';
 import { CanComponentDeactivate } from 'src/app/core/interfaces/can-component-deactivate.interface';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { generatedString, GeneratorFactory, GeneratorService } from 'src/app/core/services/generator.service';
@@ -25,7 +25,7 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
     @Inject(generatedString) public newID: string,
     private orderService: OrderService,
     private cartService: CartService,
-    private router: Router,
+    private routerFacade: RouterFacade,
     private dialogService: DialogService
   ) { }
 
@@ -49,13 +49,13 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
     this.orderService.createOrder(order)
       .then(() => {
         this.cartService.removeAllProducts();
-        this.router.navigate(['/products-list']);
+        this.routerFacade.goHome();
       })
       .catch(err => console.log(err));
   }
 
   onGoBack(): void {
-    this.router.navigate(['/cart']);
+    this.routerFacade.goTo({ path: ['/cart'] });
   }
 
   canDeactivate(): Observable<boolean> | boolean {

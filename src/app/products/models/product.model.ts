@@ -4,7 +4,16 @@ export enum Category {
   Whisky
 }
 
-export class Product {
+export interface IProduct {
+  id?: string;
+  name?: string;
+  description?: string;
+  price?: number;
+  category?: Category;
+  isAvailable?: boolean;
+}
+
+export class Product implements IProduct {
   constructor(
     public id: string,
     public name: string,
