@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { UrlTree } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ProductsFacade } from 'src/app/core/@ngrx/products';
+import { RouterFacade } from 'src/app/core/@ngrx/router';
 import { CanComponentDeactivate } from 'src/app/core/interfaces/can-component-deactivate.interface';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { generatedString, GeneratorFactory, GeneratorService } from 'src/app/core/services/generator.service';
@@ -18,24 +19,43 @@ import { Product } from 'src/app/products/models/product.model';
     { provide: generatedString, useFactory: GeneratorFactory(10), deps: [GeneratorService] },
   ]
 })
-export class AdminProductFormComponent implements OnInit, CanComponentDeactivate {
+export class AdminProductFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   product: Product;
+  private componentDestroyed$: Subject<void> = new Subject<void>();
   @ViewChild('form', { static: false })
   userForm: NgForm;
   private isSubmitClick = false;
 
   constructor(
     @Inject(generatedString) public newID: string,
-    private route: ActivatedRoute,
-    private router: Router,
     private productsFacade: ProductsFacade,
+    private routerFacade: RouterFacade,
     private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
-    this.route.data.pipe(pluck('product')).subscribe((product: Product) => {
-      this.product = { ...product };
-    });
+    const observer: any = {
+      next: (product: Product): void => {
+        this.product = {...product};
+      },
+      error(err: Error | string): void {
+        console.log(err);
+      },
+      complete(): void {
+        console.log('Stream is completed');
+      }
+    };
+
+    this.productsFacade.selectedProductByUrl$
+      .pipe(
+        takeUntil(this.componentDestroyed$)
+      )
+      .subscribe(observer);
+  }
+
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 
   onSaveProduct(): void {
@@ -57,7 +77,7 @@ export class AdminProductFormComponent implements OnInit, CanComponentDeactivate
   }
 
   onGoBack(): void {
-    this.router.navigate(['/admin/products']);
+    this.routerFacade.goTo({ path: ['/admin/products'] });
   }
 
   canDeactivate():
