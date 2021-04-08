@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/cart/models/cart-item.model';
 import { CartService } from 'src/app/cart/services/cart.service';
@@ -19,10 +20,13 @@ import { OrderService } from '../../services/order.service';
   ]
 })
 export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
-  public order: Order;
+  orderForm: FormGroup;
+  cartItems: CartItem[];
+  totalSum: number;
 
   constructor(
     @Inject(generatedString) public newID: string,
+    private formBuilder: FormBuilder,
     private orderService: OrderService,
     private cartService: CartService,
     private routerFacade: RouterFacade,
@@ -34,24 +38,46 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
   }
 
   ngOnInit(): void {
-    this.order = new Order(
-      this.newID,
-      this.cartService.getProducts(),
-      this.cartService.getTotalSum(),
-      null,
-      null
-    );
+    this.cartItems = this.cartService.getProducts();
+    this.totalSum = this.cartService.getTotalSum();
+    this.buildForm();
   }
 
   onSaveOrder(): void {
-    const order = { ...this.order };
 
-    this.orderService.createOrder(order)
-      .then(() => {
-        this.cartService.removeAllProducts();
-        this.routerFacade.goHome();
-      })
-      .catch(err => console.log(err));
+    console.log(this.orderForm.value);
+
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      selfPickup,
+      address
+    } = this.orderForm.value;
+
+    const order = new Order(
+      this.newID,
+      this.cartService.getProducts(),
+      this.cartService.getTotalSum(),
+      firstName,
+      lastName,
+      email,
+      phone,
+      selfPickup,
+      address
+    );
+
+    console.log(order);
+
+    // const order = { ...this.order };
+
+    // this.orderService.createOrder(order)
+    //   .then(() => {
+    //     this.cartService.removeAllProducts();
+    //     this.routerFacade.goHome();
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   onGoBack(): void {
@@ -64,5 +90,16 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
     }
 
     return this.dialogService.confirm('Are you sure?');
+  }
+
+  private buildForm(): void {
+    this.orderForm = this.formBuilder.group({
+      firstName: new FormControl('', {validators: [Validators.required]}),
+      lastName: '',
+      email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+'), Validators.email]),
+      phone: new FormControl('', {validators: [Validators.required]}),
+      selfPickup: true,
+      address: ''
+    });
   }
 }

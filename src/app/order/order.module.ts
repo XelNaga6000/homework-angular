@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ProcessOrderComponent } from './components/process-order/process-order.component';
 import { SharedModule } from '../shared/shared.module';
 import { OrderRoutingModule } from './order-routing.module';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     SharedModule,
-    FormsModule,
+    ReactiveFormsModule,
     OrderRoutingModule
   ],
   exports: [

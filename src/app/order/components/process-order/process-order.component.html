@@ -1,5 +1,5 @@
 <div class="row justify-content-sm-center">
-  <div class="col-sm-8">
+  <div class="col-md-7">
     <div class="card">
       <div class="card-header">
           <h4 class="card-title">
@@ -7,41 +7,83 @@
           </h4>
       </div>
       <div class="card-body">
-          <form (ngSubmit)="onSaveOrder()" id="order-form" #form="ngForm">
+          <form (ngSubmit)="onSaveOrder()" id="order-form" [formGroup]="orderForm">
             <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" 
-                  class="form-control" 
-                  id="name" name="name"
-                  placeholder="Name"
-                  required
-                  [(ngModel)]="order.name">
+              <label for="firstName">First Name</label>
+              <input
+                type="text" 
+                class="form-control" 
+                id="firstName"
+                placeholder="First Name (required)"
+                formControlName="firstName"
+              >
             </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input
+                type="text" 
+                class="form-control" 
+                id="lastName"
+                placeholder="Last Name"
+                formControlName="lastName"
+              >
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                class="form-control" 
+                id="email"
+                placeholder="Email (required)"
+                formControlName="email"
+              >
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input
+                type="tel"
+                class="form-control" 
+                id="phone"
+                placeholder="380xxxxxxxxx"
+                pattern="380[0-9]{9}"
+                formControlName="phone"
+              >
+            </div>
+            <div class="form-group form-check">
+              <input
+                type="checkbox"
+                class="form-check-input" 
+                id="selfPickup"
+                formControlName="selfPickup"
+              >
+              <label class="form-check-label" for="selfPickup">
+                Self-pickup
+              </label>
+          </div>
             <div class="form-group">
               <label for="address">Address</label>
-              <input type="text" 
-                  class="form-control" 
-                  id="address" name="address"
-                  placeholder="Address"
-                  required
-                  [(ngModel)]="order.address">
+              <textarea
+                class="form-control"
+                id="address"
+                formControlName="address"
+              ></textarea>
             </div>
-          <div class="controls">
-            <button class="btn btn-secondary"
-              type="button"
-              (click)="onGoBack()">Back
-            </button>
-            <button 
-              type="submit" 
-              class="btn btn-primary"
-              [disabled]="form.invalid">Buy
-            </button>
-          </div>
+            <div class="controls">
+              <button class="btn btn-secondary"
+                type="button"
+                (click)="onGoBack()">Back
+              </button>
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                [disabled]="!orderForm.valid">Buy
+              </button>
+            </div>
           </form>
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
+  <div class="col-md-5">
     <div class="card">
       <div class="card-header">
           <h4 class="card-title">
@@ -59,7 +101,7 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let item of order.cartItems; trackBy: trackByProductId">
+              <ng-container *ngFor="let item of cartItems; trackBy: trackByProductId">
                 <tr>
                   <th scope="row">{{item.product.name}}</th>
                   <td>{{item.quantity}}</td>
@@ -72,3 +114,9 @@
     </div>
   </div>
 </div>
+
+<br>Dirty: {{ orderForm.dirty }}
+<br>Touched: {{ orderForm.touched }}
+<br>Valid: {{ orderForm.valid }}
+<br>Value: {{ orderForm.value | json }}
+<br>Form Status: {{orderForm.status }}

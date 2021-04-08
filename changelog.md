@@ -85,3 +85,6 @@ Added ngrx; Added Products store
 06.04.2021
 Connect Products store with components via facade
 Added Router store
+
+08.04.2021
+Added reactive form for ProcessOrder component
