@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/cart/models/cart-item.model';
 import { CartService } from 'src/app/cart/services/cart.service';
@@ -7,6 +7,7 @@ import { RouterFacade } from 'src/app/core/@ngrx/router';
 import { CanComponentDeactivate } from 'src/app/core/interfaces/can-component-deactivate.interface';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { generatedString, GeneratorFactory, GeneratorService } from 'src/app/core/services/generator.service';
+import { CustomValidators } from 'src/app/validators/custom.validators';
 import { Order } from '../../models/order.model';
 import { OrderService } from '../../services/order.service';
 
@@ -23,6 +24,10 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
   orderForm: FormGroup;
   cartItems: CartItem[];
   totalSum: number;
+
+  get selfPickup(): AbstractControl {
+    return this.orderForm.get('selfPickup');
+  }
 
   constructor(
     @Inject(generatedString) public newID: string,
@@ -44,28 +49,18 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
   }
 
   onSaveOrder(): void {
-
     console.log(this.orderForm.value);
-
-    const {
-      firstName,
-      lastName,
-      email,
-      phone,
-      selfPickup,
-      address
-    } = this.orderForm.value;
 
     const order = new Order(
       this.newID,
       this.cartService.getProducts(),
       this.cartService.getTotalSum(),
-      firstName,
-      lastName,
-      email,
-      phone,
-      selfPickup,
-      address
+      this.orderForm.value.firstName,
+      this.orderForm.value.lastName,
+      this.orderForm.value.email,
+      this.orderForm.value.phone,
+      this.orderForm.value.selfPickup,
+      this.orderForm.value.address
     );
 
     console.log(order);
@@ -94,9 +89,9 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
 
   private buildForm(): void {
     this.orderForm = this.formBuilder.group({
-      firstName: new FormControl('', {validators: [Validators.required]}),
+      firstName: new FormControl('', {validators: [CustomValidators.firstName]}),
       lastName: '',
-      email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+'), Validators.email]),
+      email: '',
       phone: new FormControl('', {validators: [Validators.required]}),
       selfPickup: true,
       address: ''

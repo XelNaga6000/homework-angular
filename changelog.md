@@ -88,3 +88,6 @@ Added Router store
 
 08.04.2021
 Added reactive form for ProcessOrder component
+
+0.9.04.2021
+Added custom firstName validator and email validator directive

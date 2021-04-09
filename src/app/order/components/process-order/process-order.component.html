@@ -36,6 +36,7 @@
                 id="email"
                 placeholder="Email (required)"
                 formControlName="email"
+                appEmailValidator
               >
             </div>
             <div class="form-group">
@@ -59,8 +60,8 @@
               <label class="form-check-label" for="selfPickup">
                 Self-pickup
               </label>
-          </div>
-            <div class="form-group">
+            </div>
+            <div class="form-group" *ngIf="selfPickup.value">
               <label for="address">Address</label>
               <textarea
                 class="form-control"
