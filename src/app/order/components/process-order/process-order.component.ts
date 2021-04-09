@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/cart/models/cart-item.model';
 import { CartService } from 'src/app/cart/services/cart.service';
@@ -29,6 +29,10 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
     return this.orderForm.get('selfPickup');
   }
 
+  get phones(): FormArray {
+    return this.orderForm.get('phones') as FormArray;
+  }
+
   constructor(
     @Inject(generatedString) public newID: string,
     private formBuilder: FormBuilder,
@@ -48,6 +52,14 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
     this.buildForm();
   }
 
+  onAddPhone(skipRequired): void {
+    this.phones.push(this.buildPhones(skipRequired));
+  }
+
+  onRemovePhone(index: number): void {
+    this.phones.removeAt(index);
+  }
+
   onSaveOrder(): void {
     console.log(this.orderForm.value);
 
@@ -58,7 +70,7 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
       this.orderForm.value.firstName,
       this.orderForm.value.lastName,
       this.orderForm.value.email,
-      this.orderForm.value.phone,
+      this.orderForm.value.phones.map(p => p.phone),
       this.orderForm.value.selfPickup,
       this.orderForm.value.address
     );
@@ -92,9 +104,19 @@ export class ProcessOrderComponent implements OnInit, CanComponentDeactivate {
       firstName: new FormControl('', {validators: [CustomValidators.firstName]}),
       lastName: '',
       email: '',
-      phone: new FormControl('', {validators: [Validators.required]}),
+      phones: this.formBuilder.array([this.buildPhones()]),
       selfPickup: true,
       address: ''
+    });
+  }
+
+  private buildPhones(skipRequired: boolean = false): FormGroup {
+    const validators = [Validators.pattern('380[0-9]{9}')];
+    if (!skipRequired) {
+      validators.push(Validators.required);
+    }
+    return this.formBuilder.group({
+      phone: new FormControl('', {validators})
     });
   }
 }

@@ -8,7 +8,7 @@ export class Order {
     public firstName: string,
     public lastName: string,
     public email: string,
-    public phone: number,
+    public phones: Array<string>,
     public selfPickup: boolean = false,
     public address: string,
   ) { }
