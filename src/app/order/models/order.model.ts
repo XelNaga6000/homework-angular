@@ -5,7 +5,11 @@ export class Order {
     public id: string,
     public cartItems: Array<CartItem>,
     public totalSum: number,
-    public name: string,
-    public address: string
+    public firstName: string,
+    public lastName: string,
+    public email: string,
+    public phones: Array<string>,
+    public selfPickup: boolean = false,
+    public address: string,
   ) { }
 }

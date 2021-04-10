@@ -9,17 +9,33 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Total Sum</th>
-            <th scope="col">Buyer Name</th>
-            <th scope="col">Buyer Address</th>
+            <th scope="col">Products</th>
+            <th scope="col">Price</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phones</th>
+            <th scope="col">Address</th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let order of orders; trackBy: trackById">
             <tr>
               <th scope="row">{{order.id}}</th>
+              <td>
+                <ng-container *ngFor="let item of order.cartItems">
+                  {{item.product.name}}
+                  <br />
+                </ng-container>
+              </td>
               <td>{{order.totalSum | currency:'USD':'symbol':'1.0-2'}}</td>
-              <td>{{order.name}}</td>
+              <td>{{order.firstName}} {{order.lastName}}</td>
+              <td>{{order.email}}</td>
+              <td>
+                <ng-container *ngFor="let phone of order.phones">
+                  {{phone}}
+                  <br />
+                </ng-container>
+              </td>
               <td>{{order.address}}</td>
             </tr>
           </ng-container>

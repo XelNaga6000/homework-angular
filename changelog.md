@@ -85,3 +85,13 @@ Added ngrx; Added Products store
 06.04.2021
 Connect Products store with components via facade
 Added Router store
+
+08.04.2021
+Added reactive form for ProcessOrder component
+
+09.04.2021
+Added custom firstName validator and email validator directive
+Added phones FormArray
+
+10.04.2021
+Added multiple phones to order form; Fixed bugs

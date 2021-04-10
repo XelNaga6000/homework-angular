@@ -35,27 +35,7 @@
   ],
   "orders": [
     {
-      "id": "jhvWfhREdm",
-      "cartItems": [
-        {
-          "product": {
-            "id": "1",
-            "name": "Lagavulin",
-            "description": "Good one",
-            "price": 100,
-            "category": 3,
-            "isAvailable": true
-          },
-          "quantity": 8,
-          "totalPrice": 800
-        }
-      ],
-      "totalSum": 800,
-      "name": "El Barto",
-      "address": "Springfield"
-    },
-    {
-      "id": "0g9dtI696I",
+      "id": "sHGHhdZTbs",
       "cartItems": [
         {
           "product": {
@@ -66,13 +46,32 @@
             "category": 2,
             "isAvailable": true
           },
-          "quantity": 4,
-          "totalPrice": 40
+          "quantity": 3,
+          "totalPrice": 30
+        },
+        {
+          "product": {
+            "id": "1",
+            "name": "Lagavulin",
+            "description": "Good one",
+            "price": 100,
+            "category": 3,
+            "isAvailable": true
+          },
+          "quantity": 1,
+          "totalPrice": 100
         }
       ],
-      "totalSum": 40,
-      "name": "Marge Simpson",
-      "address": "Springfield"
+      "totalSum": 130,
+      "firstName": "Not Stepan",
+      "lastName": "Vasylyshyn",
+      "email": "sdfsdf@sdfsdf.dfgdfg",
+      "phones": [
+        "380111111111",
+        "380111111112"
+      ],
+      "selfPickup": true,
+      "address": "Zoii Kosmodemjanskoji, 10"
     }
   ]
 }
