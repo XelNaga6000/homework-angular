@@ -14,3 +14,12 @@
 .row {
   padding: 10px 0;
 }
+
+.error input, .error textarea {
+  box-shadow: 0 0 0 1px #d65151;
+  border-color: #d65151;
+}
+
+.error-message {
+  color: #d65151;
+}

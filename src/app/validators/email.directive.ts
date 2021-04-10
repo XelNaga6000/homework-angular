@@ -11,10 +11,14 @@ import { Validator, AbstractControl, ValidationErrors, NG_VALIDATORS } from '@an
 })
 export class EmailDirective implements Validator {
   validate(c: AbstractControl): ValidationErrors | null {
+    if (c?.value !== undefined && !c.value.length) {
+      return { required: true };
+    }
+
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (c?.value !== undefined && !re.test(String(c.value).toLowerCase())) {
-      return { email: true };
+      return { pattern: true };
     }
 
     return null;
