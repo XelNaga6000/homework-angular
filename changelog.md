@@ -98,3 +98,6 @@ Added multiple phones to order form; Fixed bugs
 
 11.04.2021
 Removed auto-generated unit tests; Added OrdedByPipe unit tests; Fixed found OrderByPipe bugs
+
+12.04.2021
+Added shallow unit tests for App component
