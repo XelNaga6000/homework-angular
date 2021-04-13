@@ -101,3 +101,6 @@ Removed auto-generated unit tests; Added OrdedByPipe unit tests; Fixed found Ord
 
 12.04.2021
 Added shallow unit tests for App component
+
+13.04.2021
+Added unit tests for Cart service
