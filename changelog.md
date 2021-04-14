@@ -107,3 +107,4 @@ Added unit tests for Cart service
 
 14.04.2021
 Added integration unit tests for ProductList and Product components
+Generated code coverage report (and removed it from gitignore for demo purposes)
