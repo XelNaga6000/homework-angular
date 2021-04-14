@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OrderByPipe implements PipeTransform {
   transform(value: Array<object>, key: string = null, isAsc: boolean = false): unknown {
     if (key && key.trim().length) {
-      return value.sort((a, b) => {
+      return [...(value || [])].sort((a, b) => {
         const aa = this.getDeepProperty(key, a);
         const bb = this.getDeepProperty(key, b);
         if (typeof aa === 'number' && typeof bb === 'number') {
