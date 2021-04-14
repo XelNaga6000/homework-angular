@@ -24,7 +24,7 @@
         <ng-template [ngIf]="showControls">
           <div *ngIf="product.isAvailable; else notInStock">
             <div *ngIf="canBuy; else inCart">
-              <button type="button" class="brn btn-primary" (click)="onBuy()">Buy</button>
+              <button type="button" class="brn btn-primary buy-button" (click)="onBuy()">Buy</button>
             </div>
             <ng-template #inCart>
               <div *ngIf="!editPath">

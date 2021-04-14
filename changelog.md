@@ -104,3 +104,6 @@ Added shallow unit tests for App component
 
 13.04.2021
 Added unit tests for Cart service
+
+14.04.2021
+Added integration unit tests for ProductList and Product components
